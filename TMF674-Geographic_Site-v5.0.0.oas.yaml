@@ -1,0 +1,4533 @@
+openapi: 3.0.1
+info:
+  title: Geographic Site
+  description: >
+    The TMF674 Geographic Site API represents a _managed_ location, such as a retail store,
+    warehouse or data centre.
+
+    It will have associations with a collection of `relatedParty`s that are in roles of
+    responsibility for the Site.
+
+    A large site might be described in terms of multiple relevant addresses and/or locations, both
+    distinguished by
+
+    `role` (such as a `delivery-address`, or `office-entrance`).
+
+
+    A Geographic Site can manage various unstructured site features, ranging from survey data to
+    safety guidelines and
+
+    hazard information.
+
+
+    ### Resources
+
+
+    - GeographicSite
+
+    - Hub
+
+
+    ### Operations
+
+
+    Geographic Site API performs the following operations:
+
+
+    - Retrieve a geographic site or a collection of geographic sites
+
+    - Create a new site
+
+    - Update a geographic site
+
+    - Delete a geographic site
+
+    - Notify events on geographic site
+  version: 5.0.0
+  x-generation-tooling-version: v8.6.10
+  x-generation-data-model-version: unknown
+  x-generation-date: '2026-08-04T12:22:59.722Z'
+  x-api-id: TMF674
+  license:
+    name: Apache License 2.0
+    url: 'https://www.apache.org/licenses/LICENSE-2.0'
+servers:
+  - url: '{apiRoot}'
+    variables:
+      apiRoot:
+        default: 'https://serverRoot/tmf-api/geographicSiteManagement/v5'
+        enum:
+          - 'https://serverRoot/tmf-api/geographicSiteManagement/v5'
+tags:
+  - name: geographicSite
+    description: Operations for GeographicSite Resource
+  - name: notification listener
+    description: Notifications for Resource Lifecycle and event notifications
+  - name: events subscription
+    description: Endpoints to register and terminate an Event Listener
+paths:
+  /geographicSite:
+    get:
+      tags:
+        - geographicSite
+      summary: List or find GeographicSite objects
+      description: List or find GeographicSite objects
+      operationId: listGeographicSite
+      parameters:
+        - $ref: '#/components/parameters/Fields'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Before'
+        - $ref: '#/components/parameters/After'
+        - $ref: '#/components/parameters/Sort'
+        - $ref: '#/components/parameters/Filter'
+      responses:
+        '200':
+          $ref: '#/components/responses/200GeographicSiteArray'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    post:
+      tags:
+        - geographicSite
+      summary: Creates a GeographicSite
+      description: This operation creates a GeographicSite entity.
+      operationId: createGeographicSite
+      parameters:
+        - $ref: '#/components/parameters/Fields'
+      requestBody:
+        $ref: '#/components/requestBodies/GeographicSite_FVO'
+      responses:
+        '201':
+          $ref: '#/components/responses/201GeographicSite'
+        '202':
+          description: Accepted
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '409':
+          $ref: '#/components/responses/409'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  '/geographicSite/{id}':
+    get:
+      tags:
+        - geographicSite
+      summary: Retrieves a GeographicSite by ID
+      description: >-
+        This operation retrieves a GeographicSite entity. Attribute selection enabled for all first
+        level attributes.
+      operationId: retrieveGeographicSite
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/Fields'
+      responses:
+        '200':
+          $ref: '#/components/responses/200GeographicSite_Get'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    patch:
+      tags:
+        - geographicSite
+      summary: Updates partially a GeographicSite
+      description: This operation updates partially a GeographicSite entity.
+      operationId: patchGeographicSite
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/Fields'
+      requestBody:
+        $ref: '#/components/requestBodies/GeographicSite_MVO'
+      responses:
+        '200':
+          $ref: '#/components/responses/200GeographicSite_Patch'
+        '202':
+          description: Accepted
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '409':
+          $ref: '#/components/responses/409'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    delete:
+      tags:
+        - geographicSite
+      summary: Deletes a GeographicSite
+      description: This operation deletes a GeographicSite entity.
+      operationId: deleteGeographicSite
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '202':
+          $ref: '#/components/responses/202'
+        '204':
+          $ref: '#/components/responses/204'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '409':
+          $ref: '#/components/responses/409'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /hub:
+    post:
+      operationId: createHub
+      summary: Create a subscription (hub) to receive Events
+      description: Sets the communication endpoint to receive Events.
+      tags:
+        - events subscription
+      requestBody:
+        $ref: '#/components/requestBodies/Hub_FVO'
+      responses:
+        '201':
+          $ref: '#/components/responses/Hub'
+        default:
+          $ref: '#/components/responses/Error'
+  '/hub/{id}':
+    get:
+      operationId: hubGet
+      summary: Retrieve a subscription (hub)
+      description: This operation retrieves the subscription to receive Events.
+      tags:
+        - events subscription
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          $ref: '#/components/responses/Hub'
+        default:
+          $ref: '#/components/responses/Error'
+    delete:
+      operationId: hubDelete
+      summary: Remove a subscription (hub) to receive Events
+      description: This operation removes the subscription to receive Events.
+      tags:
+        - events subscription
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '204':
+          description: Deleted
+        default:
+          $ref: '#/components/responses/Error'
+  /listener/geographicSiteAttributeValueChangeEvent:
+    post:
+      tags:
+        - notification listener
+      summary: Client listener for entity GeographicSiteAttributeValueChangeEvent
+      description: >-
+        Example of a client listener for receiving the notification
+        GeographicSiteAttributeValueChangeEvent
+      operationId: geographicSiteAttributeValueChangeEvent
+      requestBody:
+        $ref: '#/components/requestBodies/GeographicSiteAttributeValueChangeEvent'
+      responses:
+        '204':
+          description: Notified
+        default:
+          $ref: '#/components/responses/Error'
+  /listener/geographicSiteCreateEvent:
+    post:
+      tags:
+        - notification listener
+      summary: Client listener for entity GeographicSiteCreateEvent
+      description: Example of a client listener for receiving the notification GeographicSiteCreateEvent
+      operationId: geographicSiteCreateEvent
+      requestBody:
+        $ref: '#/components/requestBodies/GeographicSiteCreateEvent'
+      responses:
+        '204':
+          description: Notified
+        default:
+          $ref: '#/components/responses/Error'
+  /listener/geographicSiteDeleteEvent:
+    post:
+      tags:
+        - notification listener
+      summary: Client listener for entity GeographicSiteDeleteEvent
+      description: Example of a client listener for receiving the notification GeographicSiteDeleteEvent
+      operationId: geographicSiteDeleteEvent
+      requestBody:
+        $ref: '#/components/requestBodies/GeographicSiteDeleteEvent'
+      responses:
+        '204':
+          description: Notified
+        default:
+          $ref: '#/components/responses/Error'
+  /listener/geographicSiteStateChangeEvent:
+    post:
+      tags:
+        - notification listener
+      summary: Client listener for entity GeographicSiteStateChangeEvent
+      description: Example of a client listener for receiving the notification GeographicSiteStateChangeEvent
+      operationId: geographicSiteStateChangeEvent
+      requestBody:
+        $ref: '#/components/requestBodies/GeographicSiteStateChangeEvent'
+      responses:
+        '204':
+          description: Notified
+        default:
+          $ref: '#/components/responses/Error'
+components:
+  schemas:
+    Addressable:
+      type: object
+      description: Base schema for addressable entities
+      properties:
+        href:
+          type: string
+          description: Hyperlink reference
+        id:
+          type: string
+          description: unique identifier
+    Attachment:
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          description: >-
+            Complements the description of an element (for instance a product) through video,
+            pictures...
+          properties:
+            name:
+              type: string
+              description: The name of the attachment
+            description:
+              type: string
+              description: A narrative text describing the content of the attachment
+              example: Photograph of the Product
+            url:
+              type: string
+              description: 'Uniform Resource Locator, is a web page address (a subset of URI)'
+              example: 'https://host/Content/4aafacbd-11ff-4dc8-b445-305f2215715f'
+            content:
+              type: string
+              format: base64
+              description: 'The actual contents of the attachment object, if embedded, encoded as base64'
+            size:
+              $ref: '#/components/schemas/Quantity'
+            validFor:
+              $ref: '#/components/schemas/TimePeriod'
+            attachmentType:
+              type: string
+              description: >-
+                a business characterization of the purpose of the attachment, for example logo,
+                instructionManual, contractCopy
+            mimeType:
+              type: string
+              description: a technical characterization of the attachment content format using IETF Mime Types
+          required:
+            - attachmentType
+            - mimeType
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          Attachment: '#/components/schemas/Attachment'
+    Attachment_EVO:
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          description: >-
+            Complements the description of an element (for instance a product) through video,
+            pictures...
+          properties:
+            name:
+              type: string
+              description: The name of the attachment
+            description:
+              type: string
+              description: A narrative text describing the content of the attachment
+              example: Photograph of the Product
+            url:
+              type: string
+              description: 'Uniform Resource Locator, is a web page address (a subset of URI)'
+              example: 'https://host/Content/4aafacbd-11ff-4dc8-b445-305f2215715f'
+            content:
+              type: string
+              format: base64
+              description: 'The actual contents of the attachment object, if embedded, encoded as base64'
+            size:
+              $ref: '#/components/schemas/Quantity_EVO'
+            validFor:
+              $ref: '#/components/schemas/TimePeriod_EVO'
+            attachmentType:
+              type: string
+              description: >-
+                a business characterization of the purpose of the attachment, for example logo,
+                instructionManual, contractCopy
+            mimeType:
+              type: string
+              description: a technical characterization of the attachment content format using IETF Mime Types
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          Attachment: '#/components/schemas/Attachment_EVO'
+    Attachment_MVO:
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          description: >-
+            Complements the description of an element (for instance a product) through video,
+            pictures...
+          properties:
+            name:
+              type: string
+              description: The name of the attachment
+            description:
+              type: string
+              description: A narrative text describing the content of the attachment
+              example: Photograph of the Product
+            url:
+              type: string
+              description: 'Uniform Resource Locator, is a web page address (a subset of URI)'
+              example: 'https://host/Content/4aafacbd-11ff-4dc8-b445-305f2215715f'
+            content:
+              type: string
+              format: base64
+              description: 'The actual contents of the attachment object, if embedded, encoded as base64'
+            size:
+              $ref: '#/components/schemas/Quantity'
+            validFor:
+              $ref: '#/components/schemas/TimePeriod'
+            attachmentType:
+              type: string
+              description: >-
+                a business characterization of the purpose of the attachment, for example logo,
+                instructionManual, contractCopy
+            mimeType:
+              type: string
+              description: a technical characterization of the attachment content format using IETF Mime Types
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          Attachment: '#/components/schemas/Attachment_MVO'
+    AttachmentRef:
+      allOf:
+        - $ref: '#/components/schemas/EntityRef'
+        - type: object
+          description: >-
+            Attachment reference. An attachment complements the description of an element (for
+            instance a product) through video, pictures
+          properties:
+            description:
+              type: string
+              description: A narrative text describing the content of the attachment
+            url:
+              description: Link to the attachment media/content
+              type: string
+          required:
+            - '@referredType'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          AttachmentRef: '#/components/schemas/AttachmentRef'
+    AttachmentRef_EVO:
+      allOf:
+        - $ref: '#/components/schemas/EntityRef'
+        - type: object
+          description: >-
+            Attachment reference. An attachment complements the description of an element (for
+            instance a product) through video, pictures
+          properties:
+            description:
+              type: string
+              description: A narrative text describing the content of the attachment
+            url:
+              description: Link to the attachment media/content
+              type: string
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          AttachmentRef: '#/components/schemas/AttachmentRef_EVO'
+    AttachmentRef_MVO:
+      allOf:
+        - $ref: '#/components/schemas/EntityRef'
+        - type: object
+          description: >-
+            Attachment reference. An attachment complements the description of an element (for
+            instance a product) through video, pictures
+          properties:
+            description:
+              type: string
+              description: A narrative text describing the content of the attachment
+            url:
+              description: Link to the attachment media/content
+              type: string
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          AttachmentRef: '#/components/schemas/AttachmentRef_MVO'
+    AttachmentRefOrValue:
+      type: object
+      description: >-
+        The polymorphic attributes @type, @schemaLocation & @referredType are related to the
+        Attachment entity and not the AttachmentRefOrValue class itself
+      oneOf:
+        - $ref: '#/components/schemas/Attachment'
+        - $ref: '#/components/schemas/AttachmentRef'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          Attachment: '#/components/schemas/Attachment'
+          AttachmentRef: '#/components/schemas/AttachmentRef'
+    AttachmentRefOrValue_EVO:
+      type: object
+      description: >-
+        The polymorphic attributes @type, @schemaLocation & @referredType are related to the
+        Attachment entity and not the AttachmentRefOrValue class itself
+      oneOf:
+        - $ref: '#/components/schemas/Attachment_EVO'
+        - $ref: '#/components/schemas/AttachmentRef_EVO'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          Attachment: '#/components/schemas/Attachment_EVO'
+          AttachmentRef: '#/components/schemas/AttachmentRef_EVO'
+    AttachmentRefOrValue_MVO:
+      type: object
+      description: >-
+        The polymorphic attributes @type, @schemaLocation & @referredType are related to the
+        Attachment entity and not the AttachmentRefOrValue class itself
+      oneOf:
+        - $ref: '#/components/schemas/Attachment_MVO'
+        - $ref: '#/components/schemas/AttachmentRef_MVO'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          Attachment: '#/components/schemas/Attachment_MVO'
+          AttachmentRef: '#/components/schemas/AttachmentRef_MVO'
+    BooleanArrayCharacteristic:
+      allOf:
+        - $ref: '#/components/schemas/Characteristic'
+        - type: object
+          description: A characteristic which value is an array of Boolean(s).
+          properties:
+            value:
+              type: array
+              description: A characteristic which value is an array of Boolean(s).
+              items:
+                type: boolean
+                description: Characteristic item boolean value
+          required:
+            - value
+    BooleanArrayCharacteristic_EVO:
+      allOf:
+        - $ref: '#/components/schemas/Characteristic_EVO'
+        - type: object
+          description: A characteristic which value is an array of Boolean(s).
+          properties:
+            value:
+              type: array
+              description: A characteristic which value is an array of Boolean(s).
+              items:
+                type: boolean
+                description: Characteristic item boolean value
+    BooleanArrayCharacteristic_MVO:
+      allOf:
+        - $ref: '#/components/schemas/Characteristic_MVO'
+        - type: object
+          description: A characteristic which value is an array of Boolean(s).
+          properties:
+            value:
+              type: array
+              description: A characteristic which value is an array of Boolean(s).
+              items:
+                type: boolean
+                description: Characteristic item boolean value
+    BooleanCharacteristic:
+      allOf:
+        - $ref: '#/components/schemas/Characteristic'
+        - type: object
+          description: A characteristic which value is a Boolean.
+          properties:
+            value:
+              type: boolean
+              description: Value of the characteristic
+          required:
+            - value
+    BooleanCharacteristic_EVO:
+      allOf:
+        - $ref: '#/components/schemas/Characteristic_EVO'
+        - type: object
+          description: A characteristic which value is a Boolean.
+          properties:
+            value:
+              type: boolean
+              description: Value of the characteristic
+    BooleanCharacteristic_MVO:
+      allOf:
+        - $ref: '#/components/schemas/Characteristic_MVO'
+        - type: object
+          description: A characteristic which value is a Boolean.
+          properties:
+            value:
+              type: boolean
+              description: Value of the characteristic
+    CalendarPeriod:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: >-
+            The CalendarPeriod schema represents a period of time within a calendar, defining
+            various attributes such as the applicable day, timezone, hour period, and status. It is
+            designed to capture information about the availability or status of a calendar period,
+            which can be used in scheduling, booking, or resource allocation applications.
+          properties:
+            day:
+              $ref: '#/components/schemas/DayOfWeekType'
+            timeZone:
+              type: string
+              pattern: '^(Z|[+-][0-1]\d:[0-5]\d)$'
+              description: >-
+                Indication of the timezone applicable to the calendar information in ISO 8601
+                timezone: either 'Z' for UTC or an offset like +02:00 or -05:30.
+            hourPeriod:
+              type: array
+              description: 'Start and end time range in 24-hour HH:mm format.'
+              items:
+                $ref: '#/components/schemas/HourPeriod'
+            status:
+              type: string
+              description: >-
+                Indication of the availability of the calendar period (e.g.: available, booked,
+                etc.)
+          required:
+            - status
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          CalendarPeriod: '#/components/schemas/CalendarPeriod'
+    CalendarPeriod_EVO:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: >-
+            The CalendarPeriod schema represents a period of time within a calendar, defining
+            various attributes such as the applicable day, timezone, hour period, and status. It is
+            designed to capture information about the availability or status of a calendar period,
+            which can be used in scheduling, booking, or resource allocation applications.
+          properties:
+            day:
+              $ref: '#/components/schemas/DayOfWeekType'
+            timeZone:
+              type: string
+              pattern: '^(Z|[+-][0-1]\d:[0-5]\d)$'
+              description: >-
+                Indication of the timezone applicable to the calendar information in ISO 8601
+                timezone: either 'Z' for UTC or an offset like +02:00 or -05:30.
+            hourPeriod:
+              type: array
+              description: 'Start and end time range in 24-hour HH:mm format.'
+              items:
+                $ref: '#/components/schemas/HourPeriod_EVO'
+            status:
+              type: string
+              description: >-
+                Indication of the availability of the calendar period (e.g.: available, booked,
+                etc.)
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          CalendarPeriod: '#/components/schemas/CalendarPeriod_EVO'
+    CalendarPeriod_MVO:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: >-
+            The CalendarPeriod schema represents a period of time within a calendar, defining
+            various attributes such as the applicable day, timezone, hour period, and status. It is
+            designed to capture information about the availability or status of a calendar period,
+            which can be used in scheduling, booking, or resource allocation applications.
+          properties:
+            day:
+              $ref: '#/components/schemas/DayOfWeekType'
+            timeZone:
+              type: string
+              pattern: '^(Z|[+-][0-1]\d:[0-5]\d)$'
+              description: >-
+                Indication of the timezone applicable to the calendar information in ISO 8601
+                timezone: either 'Z' for UTC or an offset like +02:00 or -05:30.
+            hourPeriod:
+              type: array
+              description: 'Start and end time range in 24-hour HH:mm format.'
+              items:
+                $ref: '#/components/schemas/HourPeriod'
+            status:
+              type: string
+              description: >-
+                Indication of the availability of the calendar period (e.g.: available, booked,
+                etc.)
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          CalendarPeriod: '#/components/schemas/CalendarPeriod_MVO'
+    Characteristic:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: >-
+            Describes a given characteristic of an object or entity through a name/value pair. This
+            is an abstract base class, the actual value is in one of the strongly-typed subclasses :
+            StringCharacteristic, ObjectCharacteristic, FloatCharacteristic, BooleanCharacteristic,
+            NumberCharacteristic, IntegerCharacteristic, StringArrayCharacteristic,
+            ObjectArrayCharacteristic, BooleanArrayCharacteristic, NumberArrayCharacteristic,
+            IntegerArrayCharacteristic...
+          properties:
+            id:
+              type: string
+              description: Unique identifier of the characteristic
+            name:
+              type: string
+              description: Name of the characteristic
+            valueType:
+              type: string
+              description: Data type of the value of the characteristic
+            characteristicRelationship:
+              type: array
+              description: Collection of characteristic relationships
+              items:
+                $ref: '#/components/schemas/CharacteristicRelationship'
+          required:
+            - name
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          BooleanArrayCharacteristic: '#/components/schemas/BooleanArrayCharacteristic'
+          BooleanCharacteristic: '#/components/schemas/BooleanCharacteristic'
+          Characteristic: '#/components/schemas/Characteristic'
+          FloatCharacteristic: '#/components/schemas/FloatCharacteristic'
+          IntegerArrayCharacteristic: '#/components/schemas/IntegerArrayCharacteristic'
+          IntegerCharacteristic: '#/components/schemas/IntegerCharacteristic'
+          NumberArrayCharacteristic: '#/components/schemas/NumberArrayCharacteristic'
+          NumberCharacteristic: '#/components/schemas/NumberCharacteristic'
+          ObjectArrayCharacteristic: '#/components/schemas/ObjectArrayCharacteristic'
+          ObjectCharacteristic: '#/components/schemas/ObjectCharacteristic'
+          StringArrayCharacteristic: '#/components/schemas/StringArrayCharacteristic'
+          StringCharacteristic: '#/components/schemas/StringCharacteristic'
+    Characteristic_EVO:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: >-
+            Describes a given characteristic of an object or entity through a name/value pair. This
+            is an abstract base class, the actual value is in one of the strongly-typed subclasses :
+            StringCharacteristic, ObjectCharacteristic, FloatCharacteristic, BooleanCharacteristic,
+            NumberCharacteristic, IntegerCharacteristic, StringArrayCharacteristic,
+            ObjectArrayCharacteristic, BooleanArrayCharacteristic, NumberArrayCharacteristic,
+            IntegerArrayCharacteristic...
+          properties:
+            id:
+              type: string
+              description: Unique identifier of the characteristic
+            name:
+              type: string
+              description: Name of the characteristic
+            valueType:
+              type: string
+              description: Data type of the value of the characteristic
+            characteristicRelationship:
+              type: array
+              description: Collection of characteristic relationships
+              items:
+                $ref: '#/components/schemas/CharacteristicRelationship_EVO'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          BooleanArrayCharacteristic: '#/components/schemas/BooleanArrayCharacteristic_EVO'
+          BooleanCharacteristic: '#/components/schemas/BooleanCharacteristic_EVO'
+          Characteristic: '#/components/schemas/Characteristic_EVO'
+          FloatCharacteristic: '#/components/schemas/FloatCharacteristic_EVO'
+          IntegerArrayCharacteristic: '#/components/schemas/IntegerArrayCharacteristic_EVO'
+          IntegerCharacteristic: '#/components/schemas/IntegerCharacteristic_EVO'
+          NumberArrayCharacteristic: '#/components/schemas/NumberArrayCharacteristic_EVO'
+          NumberCharacteristic: '#/components/schemas/NumberCharacteristic_EVO'
+          ObjectArrayCharacteristic: '#/components/schemas/ObjectArrayCharacteristic_EVO'
+          ObjectCharacteristic: '#/components/schemas/ObjectCharacteristic_EVO'
+          StringArrayCharacteristic: '#/components/schemas/StringArrayCharacteristic_EVO'
+          StringCharacteristic: '#/components/schemas/StringCharacteristic_EVO'
+    Characteristic_MVO:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: >-
+            Describes a given characteristic of an object or entity through a name/value pair. This
+            is an abstract base class, the actual value is in one of the strongly-typed subclasses :
+            StringCharacteristic, ObjectCharacteristic, FloatCharacteristic, BooleanCharacteristic,
+            NumberCharacteristic, IntegerCharacteristic, StringArrayCharacteristic,
+            ObjectArrayCharacteristic, BooleanArrayCharacteristic, NumberArrayCharacteristic,
+            IntegerArrayCharacteristic...
+          properties:
+            id:
+              type: string
+              description: Unique identifier of the characteristic
+            name:
+              type: string
+              description: Name of the characteristic
+            valueType:
+              type: string
+              description: Data type of the value of the characteristic
+            characteristicRelationship:
+              type: array
+              description: Collection of characteristic relationships
+              items:
+                $ref: '#/components/schemas/CharacteristicRelationship_MVO'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          BooleanArrayCharacteristic: '#/components/schemas/BooleanArrayCharacteristic_MVO'
+          BooleanCharacteristic: '#/components/schemas/BooleanCharacteristic_MVO'
+          Characteristic: '#/components/schemas/Characteristic_MVO'
+          FloatCharacteristic: '#/components/schemas/FloatCharacteristic_MVO'
+          IntegerArrayCharacteristic: '#/components/schemas/IntegerArrayCharacteristic_MVO'
+          IntegerCharacteristic: '#/components/schemas/IntegerCharacteristic_MVO'
+          NumberArrayCharacteristic: '#/components/schemas/NumberArrayCharacteristic_MVO'
+          NumberCharacteristic: '#/components/schemas/NumberCharacteristic_MVO'
+          ObjectArrayCharacteristic: '#/components/schemas/ObjectArrayCharacteristic_MVO'
+          ObjectCharacteristic: '#/components/schemas/ObjectCharacteristic_MVO'
+          StringArrayCharacteristic: '#/components/schemas/StringArrayCharacteristic_MVO'
+          StringCharacteristic: '#/components/schemas/StringCharacteristic_MVO'
+    CharacteristicRelationship:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: Another Characteristic that is related to the current Characteristic;
+          properties:
+            id:
+              type: string
+              description: Unique identifier of the characteristic
+            relationshipType:
+              type: string
+              description: The type of relationship
+          required:
+            - id
+            - relationshipType
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          CharacteristicRelationship: '#/components/schemas/CharacteristicRelationship'
+    CharacteristicRelationship_EVO:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: Another Characteristic that is related to the current Characteristic;
+          properties:
+            id:
+              type: string
+              description: Unique identifier of the characteristic
+            relationshipType:
+              type: string
+              description: The type of relationship
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          CharacteristicRelationship: '#/components/schemas/CharacteristicRelationship_EVO'
+    CharacteristicRelationship_MVO:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: Another Characteristic that is related to the current Characteristic;
+          properties:
+            id:
+              type: string
+              description: Unique identifier of the characteristic
+            relationshipType:
+              type: string
+              description: The type of relationship
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          CharacteristicRelationship: '#/components/schemas/CharacteristicRelationship_MVO'
+    ContactMedium:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: >-
+            Indicates the contact medium that could be used to contact the party. This is an
+            abstract base class, the actual value is in one of the strongly-typed subclasses :
+            EmailContactMedium, FaxContactMedium, PhoneContactMedium,
+            GeographicAddressContactMedium, SocialMediaContactMedium...
+          properties:
+            id:
+              type: string
+              description: Identifier for this contact medium.
+            preferred:
+              type: boolean
+              description: 'If true, indicates that is the preferred contact medium'
+            contactType:
+              type: string
+              description: >-
+                Type of the contact medium to qualify it like pro email / personal email. This is
+                not used to define the contact medium used.
+            validFor:
+              $ref: '#/components/schemas/TimePeriod'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          ContactMedium: '#/components/schemas/ContactMedium'
+          EmailContactMedium: '#/components/schemas/EmailContactMedium'
+          FaxContactMedium: '#/components/schemas/FaxContactMedium'
+          GeographicAddressContactMedium: '#/components/schemas/GeographicAddressContactMedium'
+          PhoneContactMedium: '#/components/schemas/PhoneContactMedium'
+          SocialContactMedium: '#/components/schemas/SocialContactMedium'
+    ContactMedium_EVO:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: >-
+            Indicates the contact medium that could be used to contact the party. This is an
+            abstract base class, the actual value is in one of the strongly-typed subclasses :
+            EmailContactMedium, FaxContactMedium, PhoneContactMedium,
+            GeographicAddressContactMedium, SocialMediaContactMedium...
+          properties:
+            id:
+              type: string
+              description: Identifier for this contact medium.
+            preferred:
+              type: boolean
+              description: 'If true, indicates that is the preferred contact medium'
+            contactType:
+              type: string
+              description: >-
+                Type of the contact medium to qualify it like pro email / personal email. This is
+                not used to define the contact medium used.
+            validFor:
+              $ref: '#/components/schemas/TimePeriod_EVO'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          ContactMedium: '#/components/schemas/ContactMedium_EVO'
+          EmailContactMedium: '#/components/schemas/EmailContactMedium_EVO'
+          FaxContactMedium: '#/components/schemas/FaxContactMedium_EVO'
+          GeographicAddressContactMedium: '#/components/schemas/GeographicAddressContactMedium_EVO'
+          PhoneContactMedium: '#/components/schemas/PhoneContactMedium_EVO'
+          SocialContactMedium: '#/components/schemas/SocialContactMedium_EVO'
+    DayOfWeekType:
+      enum:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+        - sat
+        - sun
+        - weekdays
+        - weekend
+      type: string
+      description: Possible values for the days of the week.
+    EmailContactMedium:
+      allOf:
+        - $ref: '#/components/schemas/ContactMedium'
+        - type: object
+          description: >-
+            Describes an email that could be used to contact a party (an individual or an
+            organization)
+          properties:
+            emailAddress:
+              type: string
+              description: Full email address in standard format
+    EmailContactMedium_EVO:
+      allOf:
+        - $ref: '#/components/schemas/ContactMedium_EVO'
+        - type: object
+          description: >-
+            Describes an email that could be used to contact a party (an individual or an
+            organization)
+          properties:
+            emailAddress:
+              type: string
+              description: Full email address in standard format
+    Entity:
+      type: object
+      description: Base entity schema for use in TM Forum Open APIs. Property.
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - $ref: '#/components/schemas/Addressable'
+    EntityRef:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - $ref: '#/components/schemas/Addressable'
+        - type: object
+          description: Entity reference schema to be use for all entityRef class.
+          properties:
+            id:
+              type: string
+              description: The identifier of the referred entity.
+            href:
+              type: string
+              description: The URI of the referred entity.
+            name:
+              type: string
+              description: Name of the referred entity.
+            '@referredType':
+              type: string
+              description: The actual type of the target instance when needed for disambiguation.
+          required:
+            - id
+    EntityRelationship:
+      type: object
+      description: A uni-directional relationship from this entity to a target entity instance
+      properties:
+        href:
+          type: string
+        name:
+          type: string
+        role:
+          type: string
+          description: The association role for this entity
+        validFor:
+          $ref: '#/components/schemas/TimePeriod'
+        associationSpec:
+          $ref: '#/components/schemas/EntityRef'
+        '@baseType':
+          type: string
+          description: 'When sub-classing, this defines the super-class'
+        '@schemaLocation':
+          type: string
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        relationshipType:
+          type: string
+          description: 'Type of relationship such as migration, substitution, dependency, exclusivity'
+        id:
+          type: string
+        '@referredType':
+          type: string
+        '@type':
+          type: string
+      required:
+        - relationshipType
+        - id
+        - '@referredType'
+        - '@type'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          GeographicSiteRelationship: '#/components/schemas/GeographicSiteRelationship'
+    EntityRelationship_EVO:
+      type: object
+      description: A uni-directional relationship from this entity to a target entity instance
+      properties:
+        href:
+          type: string
+        name:
+          type: string
+        role:
+          type: string
+          description: The association role for this entity
+        validFor:
+          $ref: '#/components/schemas/TimePeriod_EVO'
+        associationSpec:
+          $ref: '#/components/schemas/EntityRef'
+        '@baseType':
+          type: string
+          description: 'When sub-classing, this defines the super-class'
+        '@schemaLocation':
+          type: string
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        relationshipType:
+          type: string
+          description: 'Type of relationship such as migration, substitution, dependency, exclusivity'
+        id:
+          type: string
+        '@referredType':
+          type: string
+        '@type':
+          type: string
+      required:
+        - '@type'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          GeographicSiteRelationship: '#/components/schemas/GeographicSiteRelationship_EVO'
+    EntityRelationship_MVO:
+      type: object
+      description: A uni-directional relationship from this entity to a target entity instance
+      properties:
+        href:
+          type: string
+        name:
+          type: string
+        role:
+          type: string
+          description: The association role for this entity
+        validFor:
+          $ref: '#/components/schemas/TimePeriod'
+        associationSpec:
+          $ref: '#/components/schemas/EntityRef'
+        '@baseType':
+          type: string
+          description: 'When sub-classing, this defines the super-class'
+        '@schemaLocation':
+          type: string
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+        relationshipType:
+          type: string
+          description: 'Type of relationship such as migration, substitution, dependency, exclusivity'
+        id:
+          type: string
+        '@referredType':
+          type: string
+        '@type':
+          type: string
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          GeographicSiteRelationship: '#/components/schemas/GeographicSiteRelationship_MVO'
+    Event:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: event with common attributes.
+          properties:
+            href:
+              type: string
+              description: Hyperlink reference
+            id:
+              type: string
+              description: unique identifier
+            correlationId:
+              type: string
+              description: The correlation id for this event.
+            domain:
+              type: string
+              description: The domain of the event.
+            title:
+              type: string
+              description: The title of the event.
+            description:
+              type: string
+              description: An explanation of the event.
+            priority:
+              type: string
+              description: A priority.
+            timeOccurred:
+              type: string
+              format: date-time
+              description: The time the event occurred.
+            source:
+              $ref: '#/components/schemas/EntityRef'
+            reportingSystem:
+              $ref: '#/components/schemas/EntityRef'
+            relatedParty:
+              type: array
+              description: Collection of related parties
+              items:
+                $ref: '#/components/schemas/RelatedPartyRefOrPartyRoleRef'
+            analyticCharacteristic:
+              type: array
+              description: Collection of analytic characteristics
+              items:
+                $ref: '#/components/schemas/Characteristic'
+            eventId:
+              type: string
+              description: The identifier of the notification.
+            eventTime:
+              type: string
+              format: date-time
+              description: Time of the event occurrence.
+            eventType:
+              type: string
+              description: The type of the notification.
+            event:
+              description: The event linked to the involved resource object
+              type: object
+          required:
+            - eventId
+            - eventTime
+            - eventType
+            - event
+    Extensible:
+      type: object
+      description: >-
+        Base Extensible schema for use in TMForum Open-APIs - When used for in a schema it means
+        that the Entity described by the schema  MUST be extended with the @type
+      properties:
+        '@type':
+          type: string
+          description: 'When sub-classing, this defines the sub-class Extensible name'
+        '@baseType':
+          type: string
+          description: 'When sub-classing, this defines the super-class'
+        '@schemaLocation':
+          type: string
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+      required:
+        - '@type'
+    ExternalIdentifier:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: >-
+            An identification of an entity that is owned by or originates in a software system
+            different from the current system, for example a ProductOrder handed off from a commerce
+            platform into an order handling system. The structure identifies the system itself, the
+            nature of the entity within the system (e.g. class name) and the unique ID of the entity
+            within the system. It is anticipated that multiple external IDs can be held for a single
+            entity, e.g. if the entity passed through multiple systems on the way to the current
+            system. In this case the consumer is expected to sequence the IDs in the array in
+            reverse order of provenance, i.e. most recent system first in the list.
+          properties:
+            owner:
+              type: string
+              description: Name of the external system that owns the entity.
+              example: MagentoCommerce
+            externalIdentifierType:
+              type: string
+              description: >-
+                Type of the identification, typically would be the type of the entity within the
+                external system
+              example: ProductOrder
+            id:
+              type: string
+              description: identification of the entity within the external system.
+          required:
+            - id
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          ExternalIdentifier: '#/components/schemas/ExternalIdentifier'
+    ExternalIdentifier_EVO:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: >-
+            An identification of an entity that is owned by or originates in a software system
+            different from the current system, for example a ProductOrder handed off from a commerce
+            platform into an order handling system. The structure identifies the system itself, the
+            nature of the entity within the system (e.g. class name) and the unique ID of the entity
+            within the system. It is anticipated that multiple external IDs can be held for a single
+            entity, e.g. if the entity passed through multiple systems on the way to the current
+            system. In this case the consumer is expected to sequence the IDs in the array in
+            reverse order of provenance, i.e. most recent system first in the list.
+          properties:
+            owner:
+              type: string
+              description: Name of the external system that owns the entity.
+              example: MagentoCommerce
+            externalIdentifierType:
+              type: string
+              description: >-
+                Type of the identification, typically would be the type of the entity within the
+                external system
+              example: ProductOrder
+            id:
+              type: string
+              description: identification of the entity within the external system.
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          ExternalIdentifier: '#/components/schemas/ExternalIdentifier_EVO'
+    ExternalIdentifier_MVO:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: >-
+            An identification of an entity that is owned by or originates in a software system
+            different from the current system, for example a ProductOrder handed off from a commerce
+            platform into an order handling system. The structure identifies the system itself, the
+            nature of the entity within the system (e.g. class name) and the unique ID of the entity
+            within the system. It is anticipated that multiple external IDs can be held for a single
+            entity, e.g. if the entity passed through multiple systems on the way to the current
+            system. In this case the consumer is expected to sequence the IDs in the array in
+            reverse order of provenance, i.e. most recent system first in the list.
+          properties:
+            owner:
+              type: string
+              description: Name of the external system that owns the entity.
+              example: MagentoCommerce
+            externalIdentifierType:
+              type: string
+              description: >-
+                Type of the identification, typically would be the type of the entity within the
+                external system
+              example: ProductOrder
+            id:
+              type: string
+              description: identification of the entity within the external system.
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          ExternalIdentifier: '#/components/schemas/ExternalIdentifier_MVO'
+    FaxContactMedium:
+      allOf:
+        - $ref: '#/components/schemas/ContactMedium'
+        - type: object
+          description: Describes a fax that could be used to contact a party (an individual or an organization)
+          properties:
+            faxNumber:
+              type: string
+              description: The fax number of the contact
+    FaxContactMedium_EVO:
+      allOf:
+        - $ref: '#/components/schemas/ContactMedium_EVO'
+        - type: object
+          description: Describes a fax that could be used to contact a party (an individual or an organization)
+          properties:
+            faxNumber:
+              type: string
+              description: The fax number of the contact
+    Feature:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: Configuration feature.
+          properties:
+            id:
+              type: string
+              description: Unique identifier
+            name:
+              description: The name for the feature.
+              type: string
+            isEnabled:
+              description: True if this feature is enabled. Default is true.
+              type: boolean
+            isBundle:
+              description: True if this is a feature group. Default is false.
+              type: boolean
+            featureCategory:
+              type: array
+              description: Collection of feature categories
+              items:
+                type: string
+                description: A feature category which may be assigned to certain groups of features.
+                example: Access Information
+            featureRelationship:
+              type: array
+              description: Collection of feature relationships
+              items:
+                $ref: '#/components/schemas/FeatureRelationship'
+            featureCharacteristic:
+              description: This is a list of Characteristics for a particular feature.
+              type: array
+              items:
+                $ref: '#/components/schemas/Characteristic'
+            policyConstraint:
+              description: Reference to manage a list of feature specification policy constraints
+              type: array
+              items:
+                $ref: '#/components/schemas/PolicyRef'
+            attachment:
+              type: array
+              description: 'Attachments relevant to this Feature, such as documentation'
+              items:
+                $ref: '#/components/schemas/AttachmentRefOrValue'
+            note:
+              type: array
+              description: Notes relevant to this Feature
+              items:
+                $ref: '#/components/schemas/Note'
+            validFor:
+              type: array
+              description: Validity period of this Feature
+              items:
+                $ref: '#/components/schemas/CalendarPeriod'
+            relatedParty:
+              type: array
+              items:
+                $ref: '#/components/schemas/RelatedPartyRefOrPartyRoleRef'
+              description: Party that may be relevant to this Feature.
+              minItems: 1
+          required:
+            - name
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          Feature: '#/components/schemas/Feature'
+          GeographicSiteFeature: '#/components/schemas/GeographicSiteFeature'
+    Feature_EVO:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: Configuration feature.
+          properties:
+            id:
+              type: string
+              description: Unique identifier
+            name:
+              description: The name for the feature.
+              type: string
+            isEnabled:
+              description: True if this feature is enabled. Default is true.
+              type: boolean
+            isBundle:
+              description: True if this is a feature group. Default is false.
+              type: boolean
+            featureCategory:
+              type: array
+              description: Collection of feature categories
+              items:
+                type: string
+                description: A feature category which may be assigned to certain groups of features.
+                example: Access Information
+            featureRelationship:
+              type: array
+              description: Collection of feature relationships
+              items:
+                $ref: '#/components/schemas/FeatureRelationship_EVO'
+            featureCharacteristic:
+              description: This is a list of Characteristics for a particular feature.
+              type: array
+              items:
+                $ref: '#/components/schemas/Characteristic_EVO'
+            policyConstraint:
+              description: Reference to manage a list of feature specification policy constraints
+              type: array
+              items:
+                $ref: '#/components/schemas/PolicyRef_EVO'
+            attachment:
+              type: array
+              description: 'Attachments relevant to this Feature, such as documentation'
+              items:
+                $ref: '#/components/schemas/AttachmentRefOrValue_EVO'
+            note:
+              type: array
+              description: Notes relevant to this Feature
+              items:
+                $ref: '#/components/schemas/Note_EVO'
+            validFor:
+              type: array
+              description: Validity period of this Feature
+              items:
+                $ref: '#/components/schemas/CalendarPeriod_EVO'
+            relatedParty:
+              type: array
+              items:
+                $ref: '#/components/schemas/RelatedPartyRefOrPartyRoleRef_EVO'
+              description: Party that may be relevant to this Feature.
+              minItems: 1
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          Feature: '#/components/schemas/Feature_EVO'
+          GeographicSiteFeature: '#/components/schemas/GeographicSiteFeature_EVO'
+    Feature_MVO:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: Configuration feature.
+          properties:
+            id:
+              type: string
+              description: Unique identifier
+            name:
+              description: The name for the feature.
+              type: string
+            isEnabled:
+              description: True if this feature is enabled. Default is true.
+              type: boolean
+            isBundle:
+              description: True if this is a feature group. Default is false.
+              type: boolean
+            featureCategory:
+              type: array
+              description: Collection of feature categories
+              items:
+                type: string
+                description: A feature category which may be assigned to certain groups of features.
+                example: Access Information
+            featureRelationship:
+              type: array
+              description: Collection of feature relationships
+              items:
+                $ref: '#/components/schemas/FeatureRelationship_MVO'
+            featureCharacteristic:
+              description: This is a list of Characteristics for a particular feature.
+              type: array
+              items:
+                $ref: '#/components/schemas/Characteristic_MVO'
+            policyConstraint:
+              description: Reference to manage a list of feature specification policy constraints
+              type: array
+              items:
+                $ref: '#/components/schemas/PolicyRef_MVO'
+            attachment:
+              type: array
+              description: 'Attachments relevant to this Feature, such as documentation'
+              items:
+                $ref: '#/components/schemas/AttachmentRefOrValue_MVO'
+            note:
+              type: array
+              description: Notes relevant to this Feature
+              items:
+                $ref: '#/components/schemas/Note'
+            validFor:
+              type: array
+              description: Validity period of this Feature
+              items:
+                $ref: '#/components/schemas/CalendarPeriod_MVO'
+            relatedParty:
+              type: array
+              items:
+                $ref: '#/components/schemas/RelatedPartyRefOrPartyRoleRef_MVO'
+              description: Party that may be relevant to this Feature.
+              minItems: 1
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          Feature: '#/components/schemas/Feature_MVO'
+          GeographicSiteFeature: '#/components/schemas/GeographicSiteFeature_MVO'
+    FeatureRelationship:
+      allOf:
+        - $ref: '#/components/schemas/EntityRef'
+        - type: object
+          description: Configuration feature
+          properties:
+            relationshipType:
+              description: This is the type of the feature relationship.
+              type: string
+              enum:
+                - excluded
+                - includes
+                - may include
+                - requires
+            name:
+              description: This is the name of the target feature.
+              type: string
+            validFor:
+              $ref: '#/components/schemas/TimePeriod'
+          required:
+            - relationshipType
+            - id
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          FeatureRelationship: '#/components/schemas/FeatureRelationship'
+    FeatureRelationship_EVO:
+      allOf:
+        - $ref: '#/components/schemas/EntityRef'
+        - type: object
+          description: Configuration feature
+          properties:
+            relationshipType:
+              description: This is the type of the feature relationship.
+              type: string
+              enum:
+                - excluded
+                - includes
+                - may include
+                - requires
+            name:
+              description: This is the name of the target feature.
+              type: string
+            validFor:
+              $ref: '#/components/schemas/TimePeriod_EVO'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          FeatureRelationship: '#/components/schemas/FeatureRelationship_EVO'
+    FeatureRelationship_MVO:
+      allOf:
+        - $ref: '#/components/schemas/EntityRef'
+        - type: object
+          description: Configuration feature
+          properties:
+            relationshipType:
+              description: This is the type of the feature relationship.
+              type: string
+              enum:
+                - excluded
+                - includes
+                - may include
+                - requires
+            name:
+              description: This is the name of the target feature.
+              type: string
+            validFor:
+              $ref: '#/components/schemas/TimePeriod'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          FeatureRelationship: '#/components/schemas/FeatureRelationship_MVO'
+    FloatCharacteristic:
+      allOf:
+        - $ref: '#/components/schemas/Characteristic'
+        - type: object
+          description: A characteristic which value is a Float.
+          properties:
+            value:
+              type: number
+              format: float
+              description: Value of the characteristic
+          required:
+            - value
+    FloatCharacteristic_EVO:
+      allOf:
+        - $ref: '#/components/schemas/Characteristic_EVO'
+        - type: object
+          description: A characteristic which value is a Float.
+          properties:
+            value:
+              type: number
+              format: float
+              description: Value of the characteristic
+    FloatCharacteristic_MVO:
+      allOf:
+        - $ref: '#/components/schemas/Characteristic_MVO'
+        - type: object
+          description: A characteristic which value is a Float.
+          properties:
+            value:
+              type: number
+              format: float
+              description: Value of the characteristic
+    GeographicAddressContactMedium:
+      allOf:
+        - $ref: '#/components/schemas/ContactMedium'
+        - type: object
+          description: >-
+            Describes a geographical address that could be used to contact a party (an individual or
+            an organization)
+          properties:
+            city:
+              type: string
+              description: The city
+            country:
+              type: string
+              description: The country
+            postCode:
+              type: string
+              description: Postcode
+            stateOrProvince:
+              type: string
+              description: State or province
+            street1:
+              type: string
+              description: Describes the street
+            street2:
+              type: string
+              description: Complementary street description
+            geographicAddress:
+              $ref: '#/components/schemas/GeographicAddressRef'
+    GeographicAddressContactMedium_EVO:
+      allOf:
+        - $ref: '#/components/schemas/ContactMedium_EVO'
+        - type: object
+          description: >-
+            Describes a geographical address that could be used to contact a party (an individual or
+            an organization)
+          properties:
+            city:
+              type: string
+              description: The city
+            country:
+              type: string
+              description: The country
+            postCode:
+              type: string
+              description: Postcode
+            stateOrProvince:
+              type: string
+              description: State or province
+            street1:
+              type: string
+              description: Describes the street
+            street2:
+              type: string
+              description: Complementary street description
+            geographicAddress:
+              $ref: '#/components/schemas/GeographicAddressRef_EVO'
+    GeographicAddressRef:
+      type: object
+      description: Reference to a Geographic Address.
+      allOf:
+        - $ref: '#/components/schemas/EntityRef'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          GeographicAddressRef: '#/components/schemas/GeographicAddressRef'
+    GeographicAddressRef_EVO:
+      type: object
+      description: Reference to a Geographic Address.
+      allOf:
+        - $ref: '#/components/schemas/EntityRef'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          GeographicAddressRef: '#/components/schemas/GeographicAddressRef_EVO'
+    GeographicLocationRef:
+      type: object
+      description: Reference to a Geographic Location
+      allOf:
+        - $ref: '#/components/schemas/EntityRef'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          GeographicLocationRef: '#/components/schemas/GeographicLocationRef'
+    GeographicLocationRef_EVO:
+      type: object
+      description: Reference to a Geographic Location
+      allOf:
+        - $ref: '#/components/schemas/EntityRef'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          GeographicLocationRef: '#/components/schemas/GeographicLocationRef_EVO'
+    GeographicSite:
+      allOf:
+        - $ref: '#/components/schemas/Place'
+        - type: object
+          description: >-
+            A GeographicSite is a managed place, such as a retail store, warehouse or data centre.
+            It will have related responsible parties, a calendar of access times and be described by
+            addresses and/or locations
+          properties:
+            note:
+              type: array
+              description: Unstructured notes made about this site
+              items:
+                $ref: '#/components/schemas/Note'
+            capacity:
+              type: array
+              description: >-
+                Capacities for the site indicating maximum operational thresholds (for example:
+                people, floorspace, racks)
+              items:
+                $ref: '#/components/schemas/Quantity'
+            code:
+              type: string
+              description: 'Deprecated: Use id, externalIdentifier and/or siteCategory or name'
+              deprecated: true
+              example: BTS
+            creationDate:
+              type: string
+              format: date-time
+              description: Date and time when the GeographicSite was created
+              example: '2024-09-23T00:00:00Z'
+            lastUpdate:
+              type: string
+              format: date-time
+              description: Date and time when the GeographicSite was last updated
+              example: '2024-10-03T00:00:00Z'
+            status:
+              type: string
+              description: >-
+                The condition of the GeographicSite, such as planned, underConstruction, cancelled,
+                active, inactive, former
+              example: planned
+            relatedParty:
+              type: array
+              description: >-
+                Collection of related roles and parties references (such as site manager, site
+                owner, site operator)
+              items:
+                $ref: '#/components/schemas/RelatedPartyRefOrPartyRoleRef'
+            calendar:
+              type: array
+              description: 'Periods of (for example) access, opening, alarm, unavailability of this site'
+              items:
+                $ref: '#/components/schemas/CalendarPeriod'
+            relatedAddress:
+              type: array
+              description: 'Collection of related address references (such as delivery-address, office-address)'
+              items:
+                $ref: '#/components/schemas/RelatedGeographicAddressRef'
+            relatedLocation:
+              type: array
+              description: 'Collection of related location references (such as retail-complex, service-access)'
+              items:
+                $ref: '#/components/schemas/RelatedGeographicLocationRef'
+            geographicSiteRelationship:
+              type: array
+              description: This site might have relationships to other sites
+              items:
+                $ref: '#/components/schemas/GeographicSiteRelationship'
+            siteCategory:
+              type: string
+              description: Site classification/category.
+              example: ShoppingUnit
+            contactMedium:
+              type: array
+              description: Contact information for people with responsibility for this site
+              items:
+                $ref: '#/components/schemas/ContactMedium'
+            siteFeature:
+              type: array
+              description: Collection of site features
+              items:
+                $ref: '#/components/schemas/GeographicSiteFeature'
+          required:
+            - name
+    GeographicSite_EVO:
+      allOf:
+        - $ref: '#/components/schemas/Place_EVO'
+        - type: object
+          description: >-
+            A GeographicSite is a managed place, such as a retail store, warehouse or data centre.
+            It will have related responsible parties, a calendar of access times and be described by
+            addresses and/or locations
+          properties:
+            note:
+              type: array
+              description: Unstructured notes made about this site
+              items:
+                $ref: '#/components/schemas/Note_EVO'
+            capacity:
+              type: array
+              description: >-
+                Capacities for the site indicating maximum operational thresholds (for example:
+                people, floorspace, racks)
+              items:
+                $ref: '#/components/schemas/Quantity_EVO'
+            code:
+              type: string
+              description: 'Deprecated: Use id, externalIdentifier and/or siteCategory or name'
+              deprecated: true
+              example: BTS
+            creationDate:
+              type: string
+              format: date-time
+              description: Date and time when the GeographicSite was created
+              example: '2024-09-23T00:00:00Z'
+            lastUpdate:
+              type: string
+              format: date-time
+              description: Date and time when the GeographicSite was last updated
+              example: '2024-10-03T00:00:00Z'
+            status:
+              type: string
+              description: >-
+                The condition of the GeographicSite, such as planned, underConstruction, cancelled,
+                active, inactive, former
+              example: planned
+            relatedParty:
+              type: array
+              description: >-
+                Collection of related roles and parties references (such as site manager, site
+                owner, site operator)
+              items:
+                $ref: '#/components/schemas/RelatedPartyRefOrPartyRoleRef_EVO'
+            calendar:
+              type: array
+              description: 'Periods of (for example) access, opening, alarm, unavailability of this site'
+              items:
+                $ref: '#/components/schemas/CalendarPeriod_EVO'
+            relatedAddress:
+              type: array
+              description: 'Collection of related address references (such as delivery-address, office-address)'
+              items:
+                $ref: '#/components/schemas/RelatedGeographicAddressRef_EVO'
+            relatedLocation:
+              type: array
+              description: 'Collection of related location references (such as retail-complex, service-access)'
+              items:
+                $ref: '#/components/schemas/RelatedGeographicLocationRef_EVO'
+            geographicSiteRelationship:
+              type: array
+              description: This site might have relationships to other sites
+              items:
+                $ref: '#/components/schemas/GeographicSiteRelationship_EVO'
+            siteCategory:
+              type: string
+              description: Site classification/category.
+              example: ShoppingUnit
+            contactMedium:
+              type: array
+              description: Contact information for people with responsibility for this site
+              items:
+                $ref: '#/components/schemas/ContactMedium_EVO'
+            siteFeature:
+              type: array
+              description: Collection of site features
+              items:
+                $ref: '#/components/schemas/GeographicSiteFeature_EVO'
+    GeographicSite_FVO:
+      allOf:
+        - $ref: '#/components/schemas/Place'
+        - type: object
+          description: >-
+            A GeographicSite is a managed place, such as a retail store, warehouse or data centre.
+            It will have related responsible parties, a calendar of access times and be described by
+            addresses and/or locations
+          properties:
+            note:
+              type: array
+              description: Unstructured notes made about this site
+              items:
+                $ref: '#/components/schemas/Note'
+            capacity:
+              type: array
+              description: >-
+                Capacities for the site indicating maximum operational thresholds (for example:
+                people, floorspace, racks)
+              items:
+                $ref: '#/components/schemas/Quantity'
+            code:
+              type: string
+              description: 'Deprecated: Use id, externalIdentifier and/or siteCategory or name'
+              deprecated: true
+              example: BTS
+            status:
+              type: string
+              description: >-
+                The condition of the GeographicSite, such as planned, underConstruction, cancelled,
+                active, inactive, former
+              example: planned
+            relatedParty:
+              type: array
+              description: >-
+                Collection of related roles and parties references (such as site manager, site
+                owner, site operator)
+              items:
+                $ref: '#/components/schemas/RelatedPartyRefOrPartyRoleRef'
+            calendar:
+              type: array
+              description: 'Periods of (for example) access, opening, alarm, unavailability of this site'
+              items:
+                $ref: '#/components/schemas/CalendarPeriod'
+            relatedAddress:
+              type: array
+              description: 'Collection of related address references (such as delivery-address, office-address)'
+              items:
+                $ref: '#/components/schemas/RelatedGeographicAddressRef'
+            relatedLocation:
+              type: array
+              description: 'Collection of related location references (such as retail-complex, service-access)'
+              items:
+                $ref: '#/components/schemas/RelatedGeographicLocationRef'
+            geographicSiteRelationship:
+              type: array
+              description: This site might have relationships to other sites
+              items:
+                $ref: '#/components/schemas/GeographicSiteRelationship'
+            siteCategory:
+              type: string
+              description: Site classification/category.
+              example: ShoppingUnit
+            contactMedium:
+              type: array
+              description: Contact information for people with responsibility for this site
+              items:
+                $ref: '#/components/schemas/ContactMedium'
+            siteFeature:
+              type: array
+              description: Collection of site features
+              items:
+                $ref: '#/components/schemas/GeographicSiteFeature'
+          required:
+            - name
+    GeographicSite_MVO:
+      allOf:
+        - $ref: '#/components/schemas/Place_MVO'
+        - type: object
+          description: >-
+            A GeographicSite is a managed place, such as a retail store, warehouse or data centre.
+            It will have related responsible parties, a calendar of access times and be described by
+            addresses and/or locations
+          properties:
+            note:
+              type: array
+              description: Unstructured notes made about this site
+              items:
+                $ref: '#/components/schemas/Note'
+            capacity:
+              type: array
+              description: >-
+                Capacities for the site indicating maximum operational thresholds (for example:
+                people, floorspace, racks)
+              items:
+                $ref: '#/components/schemas/Quantity'
+            code:
+              type: string
+              description: 'Deprecated: Use id, externalIdentifier and/or siteCategory or name'
+              deprecated: true
+              example: BTS
+            status:
+              type: string
+              description: >-
+                The condition of the GeographicSite, such as planned, underConstruction, cancelled,
+                active, inactive, former
+              example: planned
+            relatedParty:
+              type: array
+              description: >-
+                Collection of related roles and parties references (such as site manager, site
+                owner, site operator)
+              items:
+                $ref: '#/components/schemas/RelatedPartyRefOrPartyRoleRef_MVO'
+            calendar:
+              type: array
+              description: 'Periods of (for example) access, opening, alarm, unavailability of this site'
+              items:
+                $ref: '#/components/schemas/CalendarPeriod_MVO'
+            relatedAddress:
+              type: array
+              description: 'Collection of related address references (such as delivery-address, office-address)'
+              items:
+                $ref: '#/components/schemas/RelatedGeographicAddressRef_MVO'
+            relatedLocation:
+              type: array
+              description: 'Collection of related location references (such as retail-complex, service-access)'
+              items:
+                $ref: '#/components/schemas/RelatedGeographicLocationRef_MVO'
+            geographicSiteRelationship:
+              type: array
+              description: This site might have relationships to other sites
+              items:
+                $ref: '#/components/schemas/GeographicSiteRelationship_MVO'
+            siteCategory:
+              type: string
+              description: Site classification/category.
+              example: ShoppingUnit
+            contactMedium:
+              type: array
+              description: Contact information for people with responsibility for this site
+              items:
+                $ref: '#/components/schemas/ContactMedium'
+            siteFeature:
+              type: array
+              description: Collection of site features
+              items:
+                $ref: '#/components/schemas/GeographicSiteFeature_MVO'
+    GeographicSite_RES:
+      type: object
+      description: Response object for GeographicSite
+      allOf:
+        - $ref: '#/components/schemas/GeographicSite'
+      required:
+        - id
+        - href
+    GeographicSiteAttributeValueChangeEvent:
+      allOf:
+        - $ref: '#/components/schemas/Event'
+        - type: object
+          description: GeographicSiteAttributeValueChangeEvent generic structure
+          properties:
+            event:
+              $ref: '#/components/schemas/GeographicSiteAttributeValueChangeEventPayload'
+          required:
+            - event
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          GeographicSiteAttributeValueChangeEvent: '#/components/schemas/GeographicSiteAttributeValueChangeEvent'
+    GeographicSiteAttributeValueChangeEventPayload:
+      type: object
+      description: GeographicSiteAttributeValueChangeEventPayload generic structure
+      properties:
+        geographicSite:
+          $ref: '#/components/schemas/GeographicSite_EVO'
+      required:
+        - geographicSite
+    GeographicSiteCreateEvent:
+      allOf:
+        - $ref: '#/components/schemas/Event'
+        - type: object
+          description: GeographicSiteCreateEvent generic structure
+          properties:
+            event:
+              $ref: '#/components/schemas/GeographicSiteCreateEventPayload'
+          required:
+            - event
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          GeographicSiteCreateEvent: '#/components/schemas/GeographicSiteCreateEvent'
+    GeographicSiteCreateEventPayload:
+      type: object
+      description: GeographicSiteCreateEventPayload generic structure
+      properties:
+        geographicSite:
+          $ref: '#/components/schemas/GeographicSite'
+      required:
+        - geographicSite
+    GeographicSiteDeleteEvent:
+      allOf:
+        - $ref: '#/components/schemas/Event'
+        - type: object
+          description: GeographicSiteDeleteEvent generic structure
+          properties:
+            event:
+              $ref: '#/components/schemas/GeographicSiteDeleteEventPayload'
+          required:
+            - event
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          GeographicSiteDeleteEvent: '#/components/schemas/GeographicSiteDeleteEvent'
+    GeographicSiteDeleteEventPayload:
+      type: object
+      description: GeographicSiteDeleteEventPayload generic structure
+      properties:
+        geographicSite:
+          $ref: '#/components/schemas/GeographicSite_EVO'
+      required:
+        - geographicSite
+    GeographicSiteFeature:
+      type: object
+      description: >-
+        Geographic Site Feature captures various site information, ranging from survey data to
+        safety guidelines and hazard information
+      allOf:
+        - $ref: '#/components/schemas/Feature'
+    GeographicSiteFeature_EVO:
+      type: object
+      description: >-
+        Geographic Site Feature captures various site information, ranging from survey data to
+        safety guidelines and hazard information
+      allOf:
+        - $ref: '#/components/schemas/Feature_EVO'
+    GeographicSiteFeature_MVO:
+      type: object
+      description: >-
+        Geographic Site Feature captures various site information, ranging from survey data to
+        safety guidelines and hazard information
+      allOf:
+        - $ref: '#/components/schemas/Feature_MVO'
+    GeographicSiteRelationship:
+      allOf:
+        - $ref: '#/components/schemas/EntityRelationship'
+        - type: object
+          description: Details of a geographic site relationship
+          properties:
+            relationshipType:
+              type: string
+              description: 'Type of relationship between GeographicSites, such as adjacentTo, connectedBy'
+    GeographicSiteRelationship_EVO:
+      allOf:
+        - $ref: '#/components/schemas/EntityRelationship_EVO'
+        - type: object
+          description: Details of a geographic site relationship
+          properties:
+            relationshipType:
+              type: string
+              description: 'Type of relationship between GeographicSites, such as adjacentTo, connectedBy'
+    GeographicSiteRelationship_MVO:
+      allOf:
+        - $ref: '#/components/schemas/EntityRelationship_MVO'
+        - type: object
+          description: Details of a geographic site relationship
+          properties:
+            relationshipType:
+              type: string
+              description: 'Type of relationship between GeographicSites, such as adjacentTo, connectedBy'
+    GeographicSiteStateChangeEvent:
+      allOf:
+        - $ref: '#/components/schemas/Event'
+        - type: object
+          description: GeographicSiteStateChangeEvent generic structure
+          properties:
+            event:
+              $ref: '#/components/schemas/GeographicSiteStateChangeEventPayload'
+          required:
+            - event
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          GeographicSiteStateChangeEvent: '#/components/schemas/GeographicSiteStateChangeEvent'
+    GeographicSiteStateChangeEventPayload:
+      type: object
+      description: GeographicSiteStateChangeEventPayload generic structure
+      properties:
+        geographicSite:
+          $ref: '#/components/schemas/GeographicSite_EVO'
+      required:
+        - geographicSite
+    HourPeriod:
+      type: object
+      description: Hour interval
+      properties:
+        endHour:
+          type: string
+          description: >-
+            The end of the hour period, expressed in 24-hour HH:mm format (e.g., 12:00 for noon,
+            23:59 for one minute before midnight).
+          pattern: '^([01]\d|2[0-3]):([0-5]\d)$'
+          example: '12:00'
+        startHour:
+          type: string
+          description: >-
+            The beginning of the hour period, expressed in 24-hour HH:mm format (e.g., 09:00 for 9
+            AM, 17:30 for 5:30 PM).
+          pattern: '^([01]\d|2[0-3]):([0-5]\d)$'
+          example: '09:00'
+    HourPeriod_EVO:
+      type: object
+      description: Hour interval
+      properties:
+        endHour:
+          type: string
+          description: >-
+            The end of the hour period, expressed in 24-hour HH:mm format (e.g., 12:00 for noon,
+            23:59 for one minute before midnight).
+          pattern: '^([01]\d|2[0-3]):([0-5]\d)$'
+          example: '12:00'
+        startHour:
+          type: string
+          description: >-
+            The beginning of the hour period, expressed in 24-hour HH:mm format (e.g., 09:00 for 9
+            AM, 17:30 for 5:30 PM).
+          pattern: '^([01]\d|2[0-3]):([0-5]\d)$'
+          example: '09:00'
+    IntegerArrayCharacteristic:
+      allOf:
+        - $ref: '#/components/schemas/Characteristic'
+        - type: object
+          description: A characteristic which value is an array of Integer(s).
+          properties:
+            value:
+              type: array
+              description: A characteristic which value is an array of Integer(s).
+              items:
+                type: integer
+                description: Characteristic value
+          required:
+            - value
+    IntegerArrayCharacteristic_EVO:
+      allOf:
+        - $ref: '#/components/schemas/Characteristic_EVO'
+        - type: object
+          description: A characteristic which value is an array of Integer(s).
+          properties:
+            value:
+              type: array
+              description: A characteristic which value is an array of Integer(s).
+              items:
+                type: integer
+                description: Characteristic value
+    IntegerArrayCharacteristic_MVO:
+      allOf:
+        - $ref: '#/components/schemas/Characteristic_MVO'
+        - type: object
+          description: A characteristic which value is an array of Integer(s).
+          properties:
+            value:
+              type: array
+              description: A characteristic which value is an array of Integer(s).
+              items:
+                type: integer
+                description: Characteristic value
+    IntegerCharacteristic:
+      allOf:
+        - $ref: '#/components/schemas/Characteristic'
+        - type: object
+          description: A characteristic which value is a Integer.
+          properties:
+            value:
+              type: integer
+              description: Value of the characteristic
+          required:
+            - value
+    IntegerCharacteristic_EVO:
+      allOf:
+        - $ref: '#/components/schemas/Characteristic_EVO'
+        - type: object
+          description: A characteristic which value is a Integer.
+          properties:
+            value:
+              type: integer
+              description: Value of the characteristic
+    IntegerCharacteristic_MVO:
+      allOf:
+        - $ref: '#/components/schemas/Characteristic_MVO'
+        - type: object
+          description: A characteristic which value is a Integer.
+          properties:
+            value:
+              type: integer
+              description: Value of the characteristic
+    Note:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: Extra information about a given entity
+          properties:
+            id:
+              type: string
+              description: Identifier of the note within its containing entity
+              example: afa9-3d90aaa8da0f
+            author:
+              type: string
+              description: Author of the note
+              example: Mr. N. Bene
+            date:
+              type: string
+              format: date-time
+              description: Date of the note
+              example: '2020-11-20T08:00:00Z'
+            text:
+              type: string
+              description: Text of the note
+              example: This is important
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          Note: '#/components/schemas/Note'
+    Note_EVO:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: Extra information about a given entity
+          properties:
+            id:
+              type: string
+              description: Identifier of the note within its containing entity
+              example: afa9-3d90aaa8da0f
+            author:
+              type: string
+              description: Author of the note
+              example: Mr. N. Bene
+            date:
+              type: string
+              format: date-time
+              description: Date of the note
+              example: '2020-11-20T08:00:00Z'
+            text:
+              type: string
+              description: Text of the note
+              example: This is important
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          Note: '#/components/schemas/Note_EVO'
+    NumberArrayCharacteristic:
+      allOf:
+        - $ref: '#/components/schemas/Characteristic'
+        - type: object
+          description: A characteristic which value is an array of Number(s).
+          properties:
+            value:
+              type: array
+              description: A characteristic which value is an array of Number(s).
+              items:
+                type: number
+                description: Characteristic value
+          required:
+            - value
+    NumberArrayCharacteristic_EVO:
+      allOf:
+        - $ref: '#/components/schemas/Characteristic_EVO'
+        - type: object
+          description: A characteristic which value is an array of Number(s).
+          properties:
+            value:
+              type: array
+              description: A characteristic which value is an array of Number(s).
+              items:
+                type: number
+                description: Characteristic value
+    NumberArrayCharacteristic_MVO:
+      allOf:
+        - $ref: '#/components/schemas/Characteristic_MVO'
+        - type: object
+          description: A characteristic which value is an array of Number(s).
+          properties:
+            value:
+              type: array
+              description: A characteristic which value is an array of Number(s).
+              items:
+                type: number
+                description: Characteristic value
+    NumberCharacteristic:
+      allOf:
+        - $ref: '#/components/schemas/Characteristic'
+        - type: object
+          description: A characteristic which value is a Number.
+          properties:
+            value:
+              type: number
+              description: Value of the characteristic
+          required:
+            - value
+    NumberCharacteristic_EVO:
+      allOf:
+        - $ref: '#/components/schemas/Characteristic_EVO'
+        - type: object
+          description: A characteristic which value is a Number.
+          properties:
+            value:
+              type: number
+              description: Value of the characteristic
+    NumberCharacteristic_MVO:
+      allOf:
+        - $ref: '#/components/schemas/Characteristic_MVO'
+        - type: object
+          description: A characteristic which value is a Number.
+          properties:
+            value:
+              type: number
+              description: Value of the characteristic
+    ObjectArrayCharacteristic:
+      allOf:
+        - $ref: '#/components/schemas/Characteristic'
+        - type: object
+          description: A characteristic which value is an array of Object(s).
+          properties:
+            value:
+              type: array
+              description: Collection of characteristic values
+              items:
+                type: object
+                description: Characteristic value
+          required:
+            - value
+    ObjectArrayCharacteristic_EVO:
+      allOf:
+        - $ref: '#/components/schemas/Characteristic_EVO'
+        - type: object
+          description: A characteristic which value is an array of Object(s).
+          properties:
+            value:
+              type: array
+              description: Collection of characteristic values
+              items:
+                type: object
+                description: Characteristic value
+    ObjectArrayCharacteristic_MVO:
+      allOf:
+        - $ref: '#/components/schemas/Characteristic_MVO'
+        - type: object
+          description: A characteristic which value is an array of Object(s).
+          properties:
+            value:
+              type: array
+              description: Collection of characteristic values
+              items:
+                type: object
+                description: Characteristic value
+    ObjectCharacteristic:
+      allOf:
+        - $ref: '#/components/schemas/Characteristic'
+        - type: object
+          description: A characteristic which value is a Object.
+          properties:
+            value:
+              type: object
+              description: Value of the characteristic
+          required:
+            - value
+    ObjectCharacteristic_EVO:
+      allOf:
+        - $ref: '#/components/schemas/Characteristic_EVO'
+        - type: object
+          description: A characteristic which value is a Object.
+          properties:
+            value:
+              type: object
+              description: Value of the characteristic
+    ObjectCharacteristic_MVO:
+      allOf:
+        - $ref: '#/components/schemas/Characteristic_MVO'
+        - type: object
+          description: A characteristic which value is a Object.
+          properties:
+            value:
+              type: object
+              description: Value of the characteristic
+    PartyRef:
+      allOf:
+        - $ref: '#/components/schemas/EntityRef'
+        - type: object
+          description: A Party reference
+          properties:
+            '@type':
+              type: string
+              enum:
+                - PartyRef
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          PartyRef: '#/components/schemas/PartyRef'
+    PartyRef_EVO:
+      allOf:
+        - $ref: '#/components/schemas/EntityRef'
+        - type: object
+          description: A Party reference
+          properties:
+            '@type':
+              type: string
+              enum:
+                - PartyRef
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          PartyRef: '#/components/schemas/PartyRef_EVO'
+    PartyRefOrPartyRoleRef:
+      type: object
+      description: ''
+      oneOf:
+        - $ref: '#/components/schemas/PartyRef'
+        - $ref: '#/components/schemas/PartyRoleRef'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          PartyRef: '#/components/schemas/PartyRef'
+          PartyRoleRef: '#/components/schemas/PartyRoleRef'
+    PartyRefOrPartyRoleRef_EVO:
+      type: object
+      description: ''
+      oneOf:
+        - $ref: '#/components/schemas/PartyRef_EVO'
+        - $ref: '#/components/schemas/PartyRoleRef_EVO'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          PartyRef: '#/components/schemas/PartyRef_EVO'
+          PartyRoleRef: '#/components/schemas/PartyRoleRef_EVO'
+    PartyRoleRef:
+      allOf:
+        - $ref: '#/components/schemas/EntityRef'
+        - type: object
+          description: >-
+            Party role reference. A party role represents the part played by a party in a given
+            context.
+          properties:
+            '@type':
+              type: string
+              enum:
+                - PartyRoleRef
+            partyId:
+              type: string
+              description: The identifier of the engaged party that is linked to the PartyRole object.
+            partyName:
+              type: string
+              description: The name of the engaged party that is linked to the PartyRole object.
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          PartyRoleRef: '#/components/schemas/PartyRoleRef'
+    PartyRoleRef_EVO:
+      allOf:
+        - $ref: '#/components/schemas/EntityRef'
+        - type: object
+          description: >-
+            Party role reference. A party role represents the part played by a party in a given
+            context.
+          properties:
+            '@type':
+              type: string
+              enum:
+                - PartyRoleRef
+            partyId:
+              type: string
+              description: The identifier of the engaged party that is linked to the PartyRole object.
+            partyName:
+              type: string
+              description: The name of the engaged party that is linked to the PartyRole object.
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          PartyRoleRef: '#/components/schemas/PartyRoleRef_EVO'
+    PhoneContactMedium:
+      allOf:
+        - $ref: '#/components/schemas/ContactMedium'
+        - type: object
+          description: >-
+            Describes a phone number that could be used to contact a party (an individual or an
+            organization)
+          properties:
+            phoneNumber:
+              type: string
+              description: The phone number of the contact
+    PhoneContactMedium_EVO:
+      allOf:
+        - $ref: '#/components/schemas/ContactMedium_EVO'
+        - type: object
+          description: >-
+            Describes a phone number that could be used to contact a party (an individual or an
+            organization)
+          properties:
+            phoneNumber:
+              type: string
+              description: The phone number of the contact
+    Place:
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          description: >-
+            Place is the abstract base-class of GeographicAddress, GeographicSite and
+            GeographicLocation. There is no Place API
+          properties:
+            name:
+              type: string
+              description: A user-friendly name for the Place
+              example: Fountain House
+            description:
+              type: string
+              description: Additional information of a user-friendly description of the Place
+              example: A three-storey office building
+            externalIdentifier:
+              type: array
+              description: >-
+                Collection of external identifiers: This Place may be known to external systems by
+                other identifiers
+              items:
+                $ref: '#/components/schemas/ExternalIdentifier'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          GeographicSite: '#/components/schemas/GeographicSite'
+          Place: '#/components/schemas/Place'
+    Place_EVO:
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          description: >-
+            Place is the abstract base-class of GeographicAddress, GeographicSite and
+            GeographicLocation. There is no Place API
+          properties:
+            name:
+              type: string
+              description: A user-friendly name for the Place
+              example: Fountain House
+            description:
+              type: string
+              description: Additional information of a user-friendly description of the Place
+              example: A three-storey office building
+            externalIdentifier:
+              type: array
+              description: >-
+                Collection of external identifiers: This Place may be known to external systems by
+                other identifiers
+              items:
+                $ref: '#/components/schemas/ExternalIdentifier_EVO'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          GeographicSite: '#/components/schemas/GeographicSite_EVO'
+          Place: '#/components/schemas/Place_EVO'
+    Place_MVO:
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          description: >-
+            Place is the abstract base-class of GeographicAddress, GeographicSite and
+            GeographicLocation. There is no Place API
+          properties:
+            name:
+              type: string
+              description: A user-friendly name for the Place
+              example: Fountain House
+            description:
+              type: string
+              description: Additional information of a user-friendly description of the Place
+              example: A three-storey office building
+            externalIdentifier:
+              type: array
+              description: >-
+                Collection of external identifiers: This Place may be known to external systems by
+                other identifiers
+              items:
+                $ref: '#/components/schemas/ExternalIdentifier_MVO'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          GeographicSite: '#/components/schemas/GeographicSite_MVO'
+          Place: '#/components/schemas/Place_MVO'
+    PolicyRef:
+      allOf:
+        - $ref: '#/components/schemas/EntityRef'
+        - type: object
+          description: Reference to managed Policy object
+          properties:
+            id:
+              type: string
+              description: unique identifier
+            href:
+              type: string
+              description: Hyperlink reference
+            version:
+              type: string
+            '@type':
+              type: string
+              description: 'When sub-classing, this defines the sub-class Extensible name'
+            '@baseType':
+              type: string
+              description: 'When sub-classing, this defines the super-class'
+            '@schemaLocation':
+              type: string
+              description: A URI to a JSON-Schema file that defines additional attributes and relationships
+          required:
+            - id
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          PolicyRef: '#/components/schemas/PolicyRef'
+    PolicyRef_EVO:
+      allOf:
+        - $ref: '#/components/schemas/EntityRef'
+        - type: object
+          description: Reference to managed Policy object
+          properties:
+            id:
+              type: string
+              description: unique identifier
+            href:
+              type: string
+              description: Hyperlink reference
+            version:
+              type: string
+            '@type':
+              type: string
+              description: 'When sub-classing, this defines the sub-class Extensible name'
+            '@baseType':
+              type: string
+              description: 'When sub-classing, this defines the super-class'
+            '@schemaLocation':
+              type: string
+              description: A URI to a JSON-Schema file that defines additional attributes and relationships
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          PolicyRef: '#/components/schemas/PolicyRef_EVO'
+    PolicyRef_MVO:
+      allOf:
+        - $ref: '#/components/schemas/EntityRef'
+        - type: object
+          description: Reference to managed Policy object
+          properties:
+            id:
+              type: string
+              description: unique identifier
+            href:
+              type: string
+              description: Hyperlink reference
+            version:
+              type: string
+            '@type':
+              type: string
+              description: 'When sub-classing, this defines the sub-class Extensible name'
+            '@baseType':
+              type: string
+              description: 'When sub-classing, this defines the super-class'
+            '@schemaLocation':
+              type: string
+              description: A URI to a JSON-Schema file that defines additional attributes and relationships
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          PolicyRef: '#/components/schemas/PolicyRef_MVO'
+    Quantity:
+      type: object
+      description: An amount in a given unit
+      properties:
+        amount:
+          type: number
+          format: float
+          default: 1
+          description: Numeric value in a given unit
+        units:
+          type: string
+          description: Unit
+    Quantity_EVO:
+      type: object
+      description: An amount in a given unit
+      properties:
+        amount:
+          type: number
+          format: float
+          default: 1
+          description: Numeric value in a given unit
+        units:
+          type: string
+          description: Unit
+    RelatedGeographicAddressRef:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: A Postal Address (by reference) with its associated role
+          properties:
+            role:
+              type: string
+              description: The context in which this Address is being used
+              example: Installation Address
+            address:
+              $ref: '#/components/schemas/GeographicAddressRef'
+          required:
+            - role
+            - address
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          RelatedGeographicAddressRef: '#/components/schemas/RelatedGeographicAddressRef'
+    RelatedGeographicAddressRef_EVO:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: A Postal Address (by reference) with its associated role
+          properties:
+            role:
+              type: string
+              description: The context in which this Address is being used
+              example: Installation Address
+            address:
+              $ref: '#/components/schemas/GeographicAddressRef_EVO'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          RelatedGeographicAddressRef: '#/components/schemas/RelatedGeographicAddressRef_EVO'
+    RelatedGeographicAddressRef_MVO:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: A Postal Address (by reference) with its associated role
+          properties:
+            role:
+              type: string
+              description: The context in which this Address is being used
+              example: Installation Address
+            address:
+              $ref: '#/components/schemas/GeographicAddressRef'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          RelatedGeographicAddressRef: '#/components/schemas/RelatedGeographicAddressRef_MVO'
+    RelatedGeographicLocationRef:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: A Geographic Location (by reference) with its associated role
+          properties:
+            role:
+              type: string
+              description: The context in which this location is being used
+              example: Manhole Cover
+            location:
+              $ref: '#/components/schemas/GeographicLocationRef'
+          required:
+            - role
+            - location
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          RelatedGeographicLocationRef: '#/components/schemas/RelatedGeographicLocationRef'
+    RelatedGeographicLocationRef_EVO:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: A Geographic Location (by reference) with its associated role
+          properties:
+            role:
+              type: string
+              description: The context in which this location is being used
+              example: Manhole Cover
+            location:
+              $ref: '#/components/schemas/GeographicLocationRef_EVO'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          RelatedGeographicLocationRef: '#/components/schemas/RelatedGeographicLocationRef_EVO'
+    RelatedGeographicLocationRef_MVO:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: A Geographic Location (by reference) with its associated role
+          properties:
+            role:
+              type: string
+              description: The context in which this location is being used
+              example: Manhole Cover
+            location:
+              $ref: '#/components/schemas/GeographicLocationRef'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          RelatedGeographicLocationRef: '#/components/schemas/RelatedGeographicLocationRef_MVO'
+    RelatedPartyRefOrPartyRoleRef:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: >-
+            RelatedParty reference. A related party defines party or party role or its reference,
+            linked to a specific entity
+          properties:
+            role:
+              description: >-
+                Role played by the related party or party role in the context of the specific entity
+                it is linked to. Such as 'initiator', 'customer',  'salesAgent', 'user'
+              type: string
+            partyOrPartyRole:
+              $ref: '#/components/schemas/PartyRefOrPartyRoleRef'
+          required:
+            - role
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          RelatedPartyRefOrPartyRoleRef: '#/components/schemas/RelatedPartyRefOrPartyRoleRef'
+    RelatedPartyRefOrPartyRoleRef_EVO:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: >-
+            RelatedParty reference. A related party defines party or party role or its reference,
+            linked to a specific entity
+          properties:
+            role:
+              description: >-
+                Role played by the related party or party role in the context of the specific entity
+                it is linked to. Such as 'initiator', 'customer',  'salesAgent', 'user'
+              type: string
+            partyOrPartyRole:
+              $ref: '#/components/schemas/PartyRefOrPartyRoleRef_EVO'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          RelatedPartyRefOrPartyRoleRef: '#/components/schemas/RelatedPartyRefOrPartyRoleRef_EVO'
+    RelatedPartyRefOrPartyRoleRef_MVO:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: >-
+            RelatedParty reference. A related party defines party or party role or its reference,
+            linked to a specific entity
+          properties:
+            role:
+              description: >-
+                Role played by the related party or party role in the context of the specific entity
+                it is linked to. Such as 'initiator', 'customer',  'salesAgent', 'user'
+              type: string
+            partyOrPartyRole:
+              $ref: '#/components/schemas/PartyRefOrPartyRoleRef'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          RelatedPartyRefOrPartyRoleRef: '#/components/schemas/RelatedPartyRefOrPartyRoleRef_MVO'
+    SocialContactMedium:
+      allOf:
+        - $ref: '#/components/schemas/ContactMedium'
+        - type: object
+          description: >-
+            Describes a social media identifier that could be used to contact a party (an individual
+            or an organization)
+          properties:
+            socialNetworkId:
+              type: string
+              description: Identifier as a member of a social network
+    SocialContactMedium_EVO:
+      allOf:
+        - $ref: '#/components/schemas/ContactMedium_EVO'
+        - type: object
+          description: >-
+            Describes a social media identifier that could be used to contact a party (an individual
+            or an organization)
+          properties:
+            socialNetworkId:
+              type: string
+              description: Identifier as a member of a social network
+    StringArrayCharacteristic:
+      allOf:
+        - $ref: '#/components/schemas/Characteristic'
+        - type: object
+          description: A characteristic which value is an array of String(s).
+          properties:
+            value:
+              type: array
+              description: Collection of string characteristics
+              items:
+                type: string
+                description: Characteristic value
+          required:
+            - value
+    StringArrayCharacteristic_EVO:
+      allOf:
+        - $ref: '#/components/schemas/Characteristic_EVO'
+        - type: object
+          description: A characteristic which value is an array of String(s).
+          properties:
+            value:
+              type: array
+              description: Collection of string characteristics
+              items:
+                type: string
+                description: Characteristic value
+    StringArrayCharacteristic_MVO:
+      allOf:
+        - $ref: '#/components/schemas/Characteristic_MVO'
+        - type: object
+          description: A characteristic which value is an array of String(s).
+          properties:
+            value:
+              type: array
+              description: Collection of string characteristics
+              items:
+                type: string
+                description: Characteristic value
+    StringCharacteristic:
+      allOf:
+        - $ref: '#/components/schemas/Characteristic'
+        - type: object
+          description: A characteristic which value is a String.
+          properties:
+            value:
+              type: string
+              description: Value of the characteristic
+          required:
+            - value
+    StringCharacteristic_EVO:
+      allOf:
+        - $ref: '#/components/schemas/Characteristic_EVO'
+        - type: object
+          description: A characteristic which value is a String.
+          properties:
+            value:
+              type: string
+              description: Value of the characteristic
+    StringCharacteristic_MVO:
+      allOf:
+        - $ref: '#/components/schemas/Characteristic_MVO'
+        - type: object
+          description: A characteristic which value is a String.
+          properties:
+            value:
+              type: string
+              description: Value of the characteristic
+    TimePeriod:
+      type: object
+      description: 'A period of time, either as a deadline (endDateTime only) a startDateTime only, or both'
+      properties:
+        startDateTime:
+          description: 'Start of the time period, using IETC-RFC-3339 format'
+          type: string
+          format: date-time
+          example: '1985-04-12T23:20:50.52Z'
+        endDateTime:
+          description: 'End of the time period, using IETC-RFC-3339 format'
+          type: string
+          format: date-time
+          example: '1985-04-12T23:20:50.52Z'
+    TimePeriod_EVO:
+      type: object
+      description: 'A period of time, either as a deadline (endDateTime only) a startDateTime only, or both'
+      properties:
+        startDateTime:
+          description: 'Start of the time period, using IETC-RFC-3339 format'
+          type: string
+          format: date-time
+          example: '1985-04-12T23:20:50.52Z'
+        endDateTime:
+          description: 'End of the time period, using IETC-RFC-3339 format'
+          type: string
+          format: date-time
+          example: '1985-04-12T23:20:50.52Z'
+    Error:
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          Error: '#/components/schemas/Error'
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          required:
+            - code
+            - reason
+          properties:
+            code:
+              type: string
+              description: 'Application relevant detail, defined in the API or a common list.'
+            reason:
+              type: string
+              description: Explanation of the reason for the error which can be shown to a client user.
+            message:
+              type: string
+              description: >-
+                More details and corrective actions related to the error which can be shown to a
+                client user.
+            status:
+              type: string
+              description: HTTP Error code extension
+            referenceError:
+              type: string
+              description: URI of documentation describing the error.
+      description: 'Used when an API throws an Error, typically with a HTTP error response-code (3xx, 4xx, 5xx)'
+    Hub_FVO:
+      type: object
+      description: >-
+        Sets the communication endpoint address the service instance must use to deliver
+        notification information
+      required:
+        - callback
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - properties:
+            callback:
+              type: string
+              description: The callback being registered.
+            query:
+              type: string
+              description: additional data to be passed
+    Hub:
+      type: object
+      description: >-
+        Sets the communication endpoint address the service instance must use to deliver
+        notification information
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - properties:
+            id:
+              type: string
+              description: Id of the listener
+            callback:
+              type: string
+              description: The callback being registered.
+            query:
+              type: string
+              description: additional data to be passed
+          required:
+            - callback
+    JsonPatch:
+      type: object
+      description: A JSONPatch document as defined by RFC 6902
+      required:
+        - op
+        - path
+      properties:
+        op:
+          type: string
+          description: The operation to be performed
+          enum:
+            - add
+            - remove
+            - replace
+            - move
+            - copy
+            - test
+        path:
+          type: string
+          description: A JSON-Pointer
+        value:
+          description: The value to be used within the operations.
+        from:
+          type: string
+          description: A string containing a JSON Pointer value.
+    JsonPatchOperations:
+      description: JSONPatch Operations document as defined by RFC 6902
+      type: array
+      items:
+        $ref: '#/components/schemas/JsonPatch'
+  parameters:
+    Id:
+      name: id
+      required: true
+      schema:
+        type: string
+      in: path
+      description: Identifier of the Resource
+    Fields:
+      name: fields
+      in: query
+      description: Comma-separated properties to be provided in response
+      schema:
+        type: string
+    Offset:
+      name: offset
+      in: query
+      description: Requested index for start of resources to be provided in response
+      schema:
+        type: integer
+    Limit:
+      name: limit
+      in: query
+      description: Requested number of resources to be provided in response
+      schema:
+        type: integer
+    Before:
+      name: before
+      in: query
+      description: An opaque string value representing the page results before the cursor value
+      schema:
+        type: string
+    After:
+      name: after
+      in: query
+      description: An opaque string value representing the page results after the cursor value
+      schema:
+        type: string
+    Sort:
+      name: sort
+      in: query
+      description: >-
+        The default direction is Ascending order, the use of the modifier in front of the sort field
+        name, “-“, changes the sort order direction.
+      schema:
+        type: string
+    Filter:
+      name: filter
+      in: query
+      description: Filter a collection using JSONPath
+      schema:
+        type: string
+        example: 'attachment[?(@size==300)]'
+  requestBodies:
+    GeographicSite_FVO:
+      description: The GeographicSite to be created
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GeographicSite_FVO'
+          examples:
+            CreateGeographicSite:
+              $ref: '#/components/examples/CreateGeographicSite_request'
+      required: true
+    GeographicSite_MVO:
+      description: The GeographicSite to be patched
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GeographicSite_MVO'
+        application/merge-patch+json:
+          schema:
+            $ref: '#/components/schemas/GeographicSite_MVO'
+          examples:
+            GeographicSite_partialupdate_example_02:
+              $ref: '#/components/examples/GeographicSite_partialupdate_example_02_request'
+            GeographicSite_partialupdate_example_11:
+              $ref: '#/components/examples/GeographicSite_partialupdate_example_11_request'
+        application/json-patch+json:
+          schema:
+            $ref: '#/components/schemas/JsonPatchOperations'
+          examples:
+            GeographicSite_partialupdate_example_01:
+              $ref: '#/components/examples/GeographicSite_partialupdate_example_01_request'
+        application/json-patch-query+json:
+          schema:
+            $ref: '#/components/schemas/JsonPatchOperations'
+          examples:
+            GeographicSite_partialupdate_example_03:
+              $ref: '#/components/examples/GeographicSite_partialupdate_example_03_request'
+      required: true
+    GeographicSiteCreateEvent:
+      description: GeographicSite create Event payload
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GeographicSiteCreateEvent'
+          examples:
+            Create:
+              $ref: '#/components/examples/Create_request'
+      required: true
+    GeographicSiteAttributeValueChangeEvent:
+      description: GeographicSite attributeValueChange Event payload
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GeographicSiteAttributeValueChangeEvent'
+          examples:
+            AttributeValueChange:
+              $ref: '#/components/examples/AttributeValueChange_request'
+      required: true
+    GeographicSiteStateChangeEvent:
+      description: GeographicSite stateChange Event payload
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GeographicSiteStateChangeEvent'
+          examples:
+            StateChange:
+              $ref: '#/components/examples/StateChange_request'
+      required: true
+    GeographicSiteDeleteEvent:
+      description: GeographicSite delete Event payload
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GeographicSiteDeleteEvent'
+          examples:
+            Delete:
+              $ref: '#/components/examples/Delete_request'
+      required: true
+    Hub_FVO:
+      description: Data containing the callback endpoint to deliver the information
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Hub_FVO'
+          examples:
+            Basic Hub Example Request:
+              value:
+                '@type': Hub
+                callback: 'https://host/tmf-api/specificAPIName/v5/listener/specificEventListener'
+                query: data
+      required: true
+  responses:
+    '200':
+      description: OK
+    '202':
+      description: Accepted
+    '204':
+      description: Deleted
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            basic:
+              summary: Bad Request Error
+              value:
+                '@type': Error
+                code: ERR400
+                reason: Bad Request
+                message: >-
+                  The server could not understand the request due to invalid syntax. Please correct
+                  the syntax and try again.
+                referenceError: 'https://host/errors'
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            basic:
+              summary: Unauthorized Error
+              value:
+                '@type': Error
+                code: ERR401
+                reason: Unauthorized
+                message: >-
+                  You are not authorized to access the requested resource. Please provide the
+                  correct credentials.
+                referenceError: 'https://host/errors'
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            basic:
+              summary: Forbidden Error
+              value:
+                '@type': Error
+                code: ERR403
+                reason: Forbidden
+                message: >-
+                  You don't have the permission to access the requested resource. It is either
+                  read-protected or not readable by the server.
+                referenceError: 'https://host/errors'
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            basic:
+              summary: Not Found Error
+              value:
+                '@type': Error
+                code: ERR404
+                reason: Not Found
+                message: The requested URL was not found on the server.
+                referenceError: 'https://host/errors'
+    '405':
+      description: Method Not allowed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            basic:
+              summary: Method Not allowed Error
+              value:
+                '@type': Error
+                code: ERR405
+                reason: Method Not allowed
+                message: The method is not allowed for the requested URL.
+                referenceError: 'https://host/errors'
+    '409':
+      description: Conflict
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            basic:
+              summary: Conflict Error
+              value:
+                '@type': Error
+                code: ERR409
+                reason: Conflict
+                message: >-
+                  The request could not be completed due to a conflict with the current state of the
+                  target resource.
+                referenceError: 'https://host/errors'
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            basic:
+              summary: Internal Server Error example
+              value:
+                '@type': Error
+                code: ERR500
+                reason: Internal Server Error
+                message: The server encountered an internal error. Please contact the system administrator.
+                referenceError: 'https://host/errors'
+    '501':
+      description: Not Implemented
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            basic:
+              summary: Not Implemented Error
+              value:
+                '@type': Error
+                code: ERR501
+                reason: The requested operation is not implemented
+                message: >-
+                  The requested operation is not implemented. Please contact the system
+                  administrator.
+                referenceError: 'https://host/errors'
+    '503':
+      description: Service Unavailable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            basic:
+              summary: Service Unavailable Error
+              value:
+                '@type': Error
+                code: ERR503
+                reason: Service Unavailable
+                message: The service is currently unavailable. Please try again later.
+                referenceError: 'https://host/errors'
+    200GeographicSiteArray:
+      description: Success
+      headers:
+        X-Total-Count:
+          $ref: '#/components/headers/X-Total-Count'
+        X-Result-Count:
+          $ref: '#/components/headers/X-Result-Count'
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/GeographicSite_RES'
+          examples:
+            GeographicSite_list_example:
+              $ref: '#/components/examples/GeographicSite_list_example_response'
+    200GeographicSite_Get:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GeographicSite_RES'
+          examples:
+            GeographicSite_retrieve_example_01:
+              $ref: '#/components/examples/GeographicSite_retrieve_example_01_response'
+    200GeographicSite_Patch:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GeographicSite_RES'
+          examples:
+            GeographicSite_partialupdate_example_01:
+              $ref: '#/components/examples/GeographicSite_partialupdate_example_01_response'
+            GeographicSite_partialupdate_example_02:
+              $ref: '#/components/examples/GeographicSite_partialupdate_example_02_response'
+            GeographicSite_partialupdate_example_11:
+              $ref: '#/components/examples/GeographicSite_partialupdate_example_11_response'
+            GeographicSite_partialupdate_example_03:
+              $ref: '#/components/examples/GeographicSite_partialupdate_example_03_response'
+    201GeographicSite:
+      description: Created
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GeographicSite_RES'
+          examples:
+            CreateGeographicSite:
+              $ref: '#/components/examples/CreateGeographicSite_response'
+    Error:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            basic:
+              summary: Error example
+              value:
+                '@type': Error
+                code: ERR001
+                reason: Missing information
+                message: Please provide the additional example information
+                referenceError: 'https://host/errors'
+    Hub:
+      description: Notified
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Hub'
+          examples:
+            basic:
+              summary: Hub example
+              value:
+                '@type': Hub
+                callback: 'https://host/tmf-api/specificAPIName/v5/listener/specificEventListener'
+  headers:
+    X-Total-Count:
+      description: Total number of items matching criteria
+      schema:
+        type: integer
+    X-Result-Count:
+      description: Actual number of items returned in the response body
+      schema:
+        type: integer
+  securitySchemes: {}
+  examples:
+    GeographicSite_list_example_response:
+      value:
+        - '@type': GeographicSite
+          href: >-
+            https://mycsp.com/tmf-api/geographicSiteManagement/v5/geographicSite/ae4b915f-16f5-4f05-a3c7-8c6a99c7d24b
+          id: ae4b915f-16f5-4f05-a3c7-8c6a99c7d24b
+          name: BS-9283
+        - '@type': GeographicSite
+          href: >-
+            https://mycsp.com/tmf-api/geographicSiteManagement/v5/geographicSite/0738f85e-c8b0-4ed2-ac3e-b47687ade274
+          id: 0738f85e-c8b0-4ed2-ac3e-b47687ade274
+          name: BS-2397
+      description: >-
+        Retrieving a list of geographic sites with a site category (BaseStation) and status
+        (active).
+    GeographicSite_retrieve_example_01_response:
+      value:
+        '@type': GeographicSite
+        href: >-
+          https://mycsp.com/tmf-api/geographicSiteManagement/v5/geographicSite/ae4b915f-16f5-4f05-a3c7-8c6a99c7d24b
+        id: ae4b915f-16f5-4f05-a3c7-8c6a99c7d24b
+        name: BS-9283
+        externalIdentifier:
+          - '@type': ExternalIdentifier
+            owner: Address Management System
+            externalIdentifierType: Address
+            id: f76bc43c-53d5-4222-8ac3-f1a3e5b7d3ab
+        creationDate: '2024-03-15T07:44:40.056Z'
+        description: This is the site for the base station BS-9283
+        status: active
+        siteCategory: BaseStation
+        relatedParty:
+          - '@type': RelatedPartyRefOrPartyRoleRef
+            role: Owner
+            partyOrPartyRole:
+              href: >-
+                https://mycsp.com/tmf-api/partyManagement/v5/individual/da7f6b47-cd08-45a8-926b-d5824a5980e3
+              id: da7f6b47-cd08-45a8-926b-d5824a5980e3
+              name: TelcoEngineering
+              '@type': PartyRef
+              '@referredType': Organization
+        calendar:
+          - '@type': CalendarPeriod
+            day: weekdays
+            timeZone: '+00:00'
+            hourPeriod:
+              - startHour: '09:00'
+                endHour: '18:00'
+            status: open
+        relatedAddress:
+          - role: service-address
+            address:
+              id: fcdb7157-3df9-4c49-93a6-8a3a248d9a27
+              href: >-
+                https://mycsp.com/tmf-api/geographicAddressManagement/v5/geographicAddress/fcdb7157-3df9-4c49-93a6-8a3a248d9a27
+              '@type': GeographicAddressRef
+              '@referredType': GeographicAddress
+            '@type': RelatedGeographicAddressRef
+        siteFeature:
+          - id: f9f06997-5a8c-4079-9c84-afdd154c3fcf
+            name: Out Of Hours Access
+            '@type': GeographicSiteFeature
+            featureCategory:
+              - OutOfHoursAccess
+            isEnabled: true
+            featureCharacteristic:
+              - '@type': StringCharacteristic
+                id: 4b69fcbb-6d89-4de3-8f90-fd12a567ddfc
+                name: Description
+                value: >-
+                  For out-of-hours weekday access please report to the reception to gain access to
+                  the site.
+            validFor:
+              - '@type': CalendarPeriod
+                day: weekdays
+                timeZone: '+00:00'
+                hourPeriod:
+                  - startHour: '18:00'
+                    endHour: '09:00'
+                status: open
+          - id: d31a8f92-b8e7-4c82-8042-997ff5b64e30
+            name: Survey Information
+            '@type': GeographicSiteFeature
+            featureCategory:
+              - GeographicSiteFeature
+            featureCharacteristic:
+              - '@type': StringCharacteristic
+                id: 4b69fcbb-6d89-4de3-8f90-fd12a567ddfc
+                name: Site Survey Reports
+                value: >-
+                  Information on underground and overhead utilities (e.g., gas lines, electrical
+                  cables) to avoid interference during installation.
+            attachment:
+              - href: >-
+                  https://mycsp.com/tmf-api/documentManagement/v5/attachment/bc4d58a3-549c-4082-98de-d1dc9b1066a4
+                id: bc4d58a3-549c-4082-98de-d1dc9b1066a4
+                '@referredType': Attachment
+                '@type': AttachmentRef
+            note:
+              - '@type': Note
+                id: 8921d8e6-6570-4260-bba8-e66cbba4b49b
+                author: Mr. N. Bene
+                date: '2024-03-16T08:00:00Z'
+                text: Site Survey received from TechSurvey&Co
+            relatedParty:
+              - '@type': RelatedPartyRefOrPartyRoleRef
+                role: SurveyPartner
+                partyOrPartyRole:
+                  href: >-
+                    https://mycsp.com/tmf-api/partyManagement/v5/organization/1b3cc700-36cf-404c-85d5-c9f1c3c8fd99
+                  id: 1b3cc700-36cf-404c-85d5-c9f1c3c8fd99
+                  name: TechSurvey&Co
+                  '@type': PartyRef
+                  '@referredType': Organization
+      description: >-
+        Retrieving a geographic site which has an address defined by reference (id). The given
+        criterion is the geographic site id.
+    CreateGeographicSite_request:
+      value:
+        '@type': GeographicSite
+        name: BS-9283
+        externalIdentifier:
+          - '@type': ExternalIdentifier
+            owner: Address Management System
+            externalIdentifierType: Address
+            id: f76bc43c-53d5-4222-8ac3-f1a3e5b7d3ab
+        description: This is the site for the base station BS-9283
+        status: active
+        siteCategory: BaseStation
+        relatedParty:
+          - '@type': RelatedPartyRefOrPartyRoleRef
+            role: Owner
+            partyOrPartyRole:
+              href: >-
+                https://mycsp.com/tmf-api/partyManagement/v5/individual/da7f6b47-cd08-45a8-926b-d5824a5980e3
+              id: da7f6b47-cd08-45a8-926b-d5824a5980e3
+              name: TelcoEngineering
+              '@type': PartyRef
+              '@referredType': Organization
+        calendar:
+          - '@type': CalendarPeriod
+            day: weekdays
+            timeZone: '+00:00'
+            hourPeriod:
+              - startHour: '09:00'
+                endHour: '18:00'
+            status: open
+        relatedAddress:
+          - role: service-address
+            address:
+              id: fcdb7157-3df9-4c49-93a6-8a3a248d9a27
+              href: >-
+                https://mycsp.com/tmf-api/geographicAddressManagement/v5/geographicAddress/fcdb7157-3df9-4c49-93a6-8a3a248d9a27
+              '@type': GeographicAddressRef
+              '@referredType': GeographicAddress
+            '@type': RelatedGeographicAddressRef
+        siteFeature:
+          - id: f9f06997-5a8c-4079-9c84-afdd154c3fcf
+            name: Out Of Hours Access
+            '@type': GeographicSiteFeature
+            featureCategory:
+              - OutOfHoursAccess
+            isEnabled: true
+            featureCharacteristic:
+              - '@type': StringCharacteristic
+                id: 4b69fcbb-6d89-4de3-8f90-fd12a567ddfc
+                name: Out of Hours Access
+                value: >-
+                  For out-of-hours weekday access please report to the reception to gain access to
+                  the site.
+            validFor:
+              - '@type': CalendarPeriod
+                day: weekdays
+                timeZone: '+00:00'
+                hourPeriod:
+                  - startHour: '18:00'
+                    endHour: '09:00'
+                status: open
+          - id: d31a8f92-b8e7-4c82-8042-997ff5b64e30
+            name: Survey Information
+            '@type': GeographicSiteFeature
+            featureCategory:
+              - GeographicSiteFeature
+            featureCharacteristic:
+              - '@type': StringCharacteristic
+                id: 4b69fcbb-6d89-4de3-8f90-fd12a567ddfc
+                name: Site Survey Reports
+                value: >-
+                  Information on underground and overhead utilities (e.g., gas lines, electrical
+                  cables) to avoid interference during installation.
+            attachment:
+              - href: >-
+                  https://mycsp.com/tmf-api/documentManagement/v5/attachment/bc4d58a3-549c-4082-98de-d1dc9b1066a4
+                id: bc4d58a3-549c-4082-98de-d1dc9b1066a4
+                '@referredType': Attachment
+                '@type': AttachmentRef
+            note:
+              - '@type': Note
+                id: 8921d8e6-6570-4260-bba8-e66cbba4b49b
+                author: Mr. N. Bene
+                date: '2024-03-16T08:00:00Z'
+                text: Site Survey received from TechSurvey&Co
+            relatedParty:
+              - '@type': RelatedPartyRefOrPartyRoleRef
+                role: SurveyPartner
+                partyOrPartyRole:
+                  href: >-
+                    https://mycsp.com/tmf-api/partyManagement/v5/organization/1b3cc700-36cf-404c-85d5-c9f1c3c8fd99
+                  id: 1b3cc700-36cf-404c-85d5-c9f1c3c8fd99
+                  name: TechSurvey&Co
+                  '@type': PartyRef
+                  '@referredType': Organization
+      description: >-
+        POST GeographicSite request example - only a subset of geographic site attributes are used
+        in this example
+    CreateGeographicSite_response:
+      value:
+        '@type': GeographicSite
+        href: >-
+          https://mycsp.com/tmf-api/geographicSiteManagement/v5/geographicSite/f9ee9a78-63e1-4e52-aef9-8102afe3da95
+        id: f9ee9a78-63e1-4e52-aef9-8102afe3da95
+        name: BS-9283
+        externalIdentifier:
+          - '@type': ExternalIdentifier
+            owner: Address Management System
+            externalIdentifierType: Address
+            id: f76bc43c-53d5-4222-8ac3-f1a3e5b7d3ab
+        creationDate: '2024-03-15T07:44:40.056Z'
+        description: This is the site for the base station BS-9283
+        status: active
+        siteCategory: BaseStation
+        relatedParty:
+          - '@type': RelatedPartyRefOrPartyRoleRef
+            role: Owner
+            partyOrPartyRole:
+              href: >-
+                https://mycsp.com/tmf-api/partyManagement/v5/individual/da7f6b47-cd08-45a8-926b-d5824a5980e3
+              id: da7f6b47-cd08-45a8-926b-d5824a5980e3
+              name: TelcoEngineering
+              '@type': PartyRef
+              '@referredType': Organization
+        calendar:
+          - '@type': CalendarPeriod
+            day: weekdays
+            timeZone: '+00:00'
+            hourPeriod:
+              - startHour: '09:00'
+                endHour: '18:00'
+            status: open
+        relatedAddress:
+          - role: service-address
+            address:
+              id: fcdb7157-3df9-4c49-93a6-8a3a248d9a27
+              href: >-
+                https://mycsp.com/tmf-api/geographicAddressManagement/v5/geographicAddress/fcdb7157-3df9-4c49-93a6-8a3a248d9a27
+              '@type': GeographicAddressRef
+              '@referredType': GeographicAddress
+            '@type': RelatedGeographicAddressRef
+        siteFeature:
+          - id: f9f06997-5a8c-4079-9c84-afdd154c3fcf
+            name: Out Of Hours Access
+            '@type': GeographicSiteFeature
+            featureCategory:
+              - OutOfHoursAccess
+            isEnabled: true
+            featureCharacteristic:
+              - '@type': StringCharacteristic
+                id: 4b69fcbb-6d89-4de3-8f90-fd12a567ddfc
+                name: Out of Hours Access
+                value: >-
+                  For out-of-hours weekday access please report to the reception to gain access to
+                  the site.
+            validFor:
+              - '@type': CalendarPeriod
+                day: weekdays
+                timeZone: '+00:00'
+                hourPeriod:
+                  - startHour: '18:00'
+                    endHour: '09:00'
+                status: open
+          - id: d31a8f92-b8e7-4c82-8042-997ff5b64e30
+            name: Survey Information
+            '@type': GeographicSiteFeature
+            featureCategory:
+              - GeographicSiteFeature
+            featureCharacteristic:
+              - '@type': StringCharacteristic
+                id: 4b69fcbb-6d89-4de3-8f90-fd12a567ddfc
+                name: Site Survey Reports
+                value: >-
+                  Information on underground and overhead utilities (e.g., gas lines, electrical
+                  cables) to avoid interference during installation.
+            attachment:
+              - href: >-
+                  https://mycsp.com/tmf-api/documentManagement/v5/attachment/bc4d58a3-549c-4082-98de-d1dc9b1066a4
+                id: bc4d58a3-549c-4082-98de-d1dc9b1066a4
+                '@referredType': Attachment
+                '@type': AttachmentRef
+            note:
+              - '@type': Note
+                id: 8921d8e6-6570-4260-bba8-e66cbba4b49b
+                author: Mr. N. Bene
+                date: '2024-03-16T08:00:00Z'
+                text: Site Survey received from TechSurvey&Co
+            relatedParty:
+              - '@type': RelatedPartyRefOrPartyRoleRef
+                role: SurveyPartner
+                partyOrPartyRole:
+                  href: >-
+                    https://mycsp.com/tmf-api/partyManagement/v5/organization/1b3cc700-36cf-404c-85d5-c9f1c3c8fd99
+                  id: 1b3cc700-36cf-404c-85d5-c9f1c3c8fd99
+                  name: TechSurvey&Co
+                  '@type': PartyRef
+                  '@referredType': Organization
+      description: POST GeographicSite response description.
+    GeographicSite_partialupdate_example_01_request:
+      value:
+        - op: test
+          path: /siteCategory
+          value: franchise-store
+        - op: replace
+          path: /siteCategory
+          value: owned-store
+        - op: test
+          path: /description
+          value: This is the site for the base station BS-9283
+        - op: replace
+          path: /description
+          value: This is the site for the base station BS-9999
+      description: >-
+        Here is an example of a request for updating geographic site
+        ae4b915f-16f5-4f05-a3c7-8c6a99c7d24b - Change site category and description (JSON Patch;
+        update applied only if all `test` operations succeed) - the full resource representation is
+        sent in PATCH response
+    GeographicSite_partialupdate_example_01_response:
+      value:
+        '@type': GeographicSite
+        href: >-
+          https://mycsp.com/tmf-api/geographicSiteManagement/v5/geographicSite/ae4b915f-16f5-4f05-a3c7-8c6a99c7d24b
+        id: ae4b915f-16f5-4f05-a3c7-8c6a99c7d24b
+        name: BS-9999
+        externalIdentifier:
+          - '@type': ExternalIdentifier
+            owner: Address Management System
+            externalIdentifierType: Address
+            id: f76bc43c-53d5-4222-8ac3-f1a3e5b7d3ab
+        creationDate: '2024-03-15T07:44:40.056Z'
+        description: This is the site for the base station BS-9999
+        status: active
+        siteCategory: owned-store
+        relatedParty:
+          - '@type': RelatedPartyRefOrPartyRoleRef
+            role: Owner
+            partyOrPartyRole:
+              href: >-
+                https://mycsp.com/tmf-api/partyManagement/v5/individual/da7f6b47-cd08-45a8-926b-d5824a5980e3
+              id: da7f6b47-cd08-45a8-926b-d5824a5980e3
+              name: TelcoEngineering
+              '@type': PartyRef
+              '@referredType': Organization
+        calendar:
+          - '@type': CalendarPeriod
+            day: weekdays
+            timeZone: '+00:00'
+            hourPeriod:
+              - startHour: '09:00'
+                endHour: '18:00'
+            status: open
+        relatedAddress:
+          - role: service-address
+            address:
+              id: fcdb7157-3df9-4c49-93a6-8a3a248d9a27
+              href: >-
+                https://mycsp.com/tmf-api/geographicAddressManagement/v5/geographicAddress/fcdb7157-3df9-4c49-93a6-8a3a248d9a27
+              '@type': GeographicAddressRef
+              '@referredType': GeographicAddress
+            '@type': RelatedGeographicAddressRef
+        siteFeature:
+          - id: f9f06997-5a8c-4079-9c84-afdd154c3fcf
+            name: Out Of Hours Access
+            '@type': GeographicSiteFeature
+            featureCategory:
+              - OutOfHoursAccess
+            isEnabled: true
+            featureCharacteristic:
+              - '@type': StringCharacteristic
+                id: 4b69fcbb-6d89-4de3-8f90-fd12a567ddfc
+                name: Description
+                value: >-
+                  For out-of-hours weekday access please report to the reception to gain access to
+                  the site.
+            validFor:
+              - '@type': CalendarPeriod
+                day: weekdays
+                timeZone: '+00:00'
+                hourPeriod:
+                  - startHour: '18:00'
+                    endHour: '09:00'
+                status: open
+          - id: d31a8f92-b8e7-4c82-8042-997ff5b64e30
+            name: Survey Information
+            '@type': GeographicSiteFeature
+            featureCategory:
+              - GeographicSiteFeature
+            featureCharacteristic:
+              - '@type': StringCharacteristic
+                id: 4b69fcbb-6d89-4de3-8f90-fd12a567ddfc
+                name: Site Survey Reports
+                value: >-
+                  Information on underground and overhead utilities (e.g., gas lines, electrical
+                  cables) to avoid interference during installation.
+            attachment:
+              - href: >-
+                  https://mycsp.com/tmf-api/documentManagement/v5/attachment/bc4d58a3-549c-4082-98de-d1dc9b1066a4
+                id: bc4d58a3-549c-4082-98de-d1dc9b1066a4
+                '@referredType': Attachment
+                '@type': AttachmentRef
+            note:
+              - '@type': Note
+                id: 8921d8e6-6570-4260-bba8-e66cbba4b49b
+                author: Mr. N. Bene
+                date: '2024-03-16T08:00:00Z'
+                text: Site Survey received from TechSurvey&Co
+            relatedParty:
+              - '@type': RelatedPartyRefOrPartyRoleRef
+                role: SurveyPartner
+                partyOrPartyRole:
+                  href: >-
+                    https://mycsp.com/tmf-api/partyManagement/v5/organization/1b3cc700-36cf-404c-85d5-c9f1c3c8fd99
+                  id: 1b3cc700-36cf-404c-85d5-c9f1c3c8fd99
+                  name: TechSurvey&Co
+                  '@type': PartyRef
+                  '@referredType': Organization
+      description: Response message
+    GeographicSite_partialupdate_example_02_request:
+      value:
+        siteCategory: Warehouse
+        calendar:
+          - '@type': CalendarPeriod
+            day: weekdays
+            timeZone: '+00:00'
+            hourPeriod:
+              - startHour: '07:00'
+                endHour: '22:00'
+            status: open
+        '@type': GeographicSite
+      description: >-
+        Here is an example of a request for updating geographic site
+        ae4b915f-16f5-4f05-a3c7-8c6a99c7d24b - Change start and end hour, and site category - the
+        full resource representation is sent in PATCH response
+    GeographicSite_partialupdate_example_02_response:
+      value:
+        '@type': GeographicSite
+        href: >-
+          https://mycsp.com/tmf-api/geographicSiteManagement/v5/geographicSite/ae4b915f-16f5-4f05-a3c7-8c6a99c7d24b
+        id: ae4b915f-16f5-4f05-a3c7-8c6a99c7d24b
+        name: WSH-2837
+        externalIdentifier:
+          - '@type': ExternalIdentifier
+            owner: Address Management System
+            externalIdentifierType: Address
+            id: f76bc43c-53d5-4222-8ac3-f1a3e5b7d3ab
+        creationDate: '2024-03-15T07:44:40.056Z'
+        description: This is the site for the warehouse WSH-2837
+        status: active
+        siteCategory: Warehouse
+        relatedParty:
+          - '@type': RelatedPartyRefOrPartyRoleRef
+            role: Owner
+            partyOrPartyRole:
+              href: >-
+                https://mycsp.com/tmf-api/partyManagement/v5/individual/da7f6b47-cd08-45a8-926b-d5824a5980e3
+              id: da7f6b47-cd08-45a8-926b-d5824a5980e3
+              name: TelcoEngineering
+              '@type': PartyRef
+              '@referredType': Organization
+        calendar:
+          - '@type': CalendarPeriod
+            day: weekdays
+            timeZone: '+00:00'
+            hourPeriod:
+              - startHour: '07:00'
+                endHour: '22:00'
+            status: open
+        relatedAddress:
+          - role: service-address
+            address:
+              id: fcdb7157-3df9-4c49-93a6-8a3a248d9a27
+              href: >-
+                https://mycsp.com/tmf-api/geographicAddressManagement/v5/geographicAddress/fcdb7157-3df9-4c49-93a6-8a3a248d9a27
+              '@type': GeographicAddressRef
+              '@referredType': GeographicAddress
+            '@type': RelatedGeographicAddressRef
+        siteFeature:
+          - id: f9f06997-5a8c-4079-9c84-afdd154c3fcf
+            name: Out Of Hours Access
+            '@type': GeographicSiteFeature
+            featureCategory:
+              - OutOfHoursAccess
+            isEnabled: true
+            featureCharacteristic:
+              - '@type': StringCharacteristic
+                id: 4b69fcbb-6d89-4de3-8f90-fd12a567ddfc
+                name: Description
+                value: >-
+                  For out-of-hours weekday access please report to the reception to gain access to
+                  the site.
+            validFor:
+              - '@type': CalendarPeriod
+                day: weekdays
+                timeZone: '+00:00'
+                hourPeriod:
+                  - startHour: '18:00'
+                    endHour: '09:00'
+                status: open
+          - id: d31a8f92-b8e7-4c82-8042-997ff5b64e30
+            name: Survey Information
+            '@type': GeographicSiteFeature
+            featureCategory:
+              - GeographicSiteFeature
+            featureCharacteristic:
+              - '@type': StringCharacteristic
+                id: 4b69fcbb-6d89-4de3-8f90-fd12a567ddfc
+                name: Site Survey Reports
+                value: >-
+                  Information on underground and overhead utilities (e.g., gas lines, electrical
+                  cables) to avoid interference during installation.
+            attachment:
+              - href: >-
+                  https://mycsp.com/tmf-api/documentManagement/v5/attachment/bc4d58a3-549c-4082-98de-d1dc9b1066a4
+                id: bc4d58a3-549c-4082-98de-d1dc9b1066a4
+                '@referredType': Attachment
+                '@type': AttachmentRef
+            note:
+              - '@type': Note
+                id: 8921d8e6-6570-4260-bba8-e66cbba4b49b
+                author: Mr. N. Bene
+                date: '2024-03-16T08:00:00Z'
+                text: Site Survey received from TechSurvey&Co
+            relatedParty:
+              - '@type': RelatedPartyRefOrPartyRoleRef
+                role: SurveyPartner
+                partyOrPartyRole:
+                  href: >-
+                    https://mycsp.com/tmf-api/partyManagement/v5/organization/1b3cc700-36cf-404c-85d5-c9f1c3c8fd99
+                  id: 1b3cc700-36cf-404c-85d5-c9f1c3c8fd99
+                  name: TechSurvey&Co
+                  '@type': PartyRef
+                  '@referredType': Organization
+      description: Response message
+    GeographicSite_partialupdate_example_11_request:
+      value:
+        siteCategory: Warehouse
+        calendar:
+          - '@type': CalendarPeriod
+            day: weekdays
+            timeZone: '+00:00'
+            hourPeriod:
+              - endHour: '22:00'
+                startHour: '07:00'
+            status: open
+        '@type': GeographicSite
+      description: >-
+        Here is an example of a request for updating geographic site
+        ae4b915f-16f5-4f05-a3c7-8c6a99c7d24b - Change start and end hour, and site category - the
+        full resource representation is sent in PATCH response
+    GeographicSite_partialupdate_example_11_response:
+      value:
+        '@type': GeographicSite
+        href: >-
+          https://mycsp.com/tmf-api/geographicSiteManagement/v5/geographicSite/ae4b915f-16f5-4f05-a3c7-8c6a99c7d24b
+        id: ae4b915f-16f5-4f05-a3c7-8c6a99c7d24b
+        name: WSH-2837
+        externalIdentifier:
+          - '@type': ExternalIdentifier
+            owner: Address Management System
+            externalIdentifierType: Address
+            id: f76bc43c-53d5-4222-8ac3-f1a3e5b7d3ab
+        creationDate: '2024-03-15T07:44:40.056Z'
+        description: This is the site for the warehouse WSH-2837
+        status: active
+        siteCategory: Warehouse
+        relatedParty:
+          - '@type': RelatedPartyRefOrPartyRoleRef
+            role: Owner
+            partyOrPartyRole:
+              href: >-
+                https://mycsp.com/tmf-api/partyManagement/v5/individual/da7f6b47-cd08-45a8-926b-d5824a5980e3
+              id: da7f6b47-cd08-45a8-926b-d5824a5980e3
+              name: TelcoEngineering
+              '@type': PartyRef
+              '@referredType': Organization
+        calendar:
+          - '@type': CalendarPeriod
+            day: weekdays
+            timeZone: '+00:00'
+            hourPeriod:
+              - endHour: '22:00'
+                startHour: '07:00'
+            status: open
+        relatedAddress:
+          - role: service-address
+            address:
+              id: fcdb7157-3df9-4c49-93a6-8a3a248d9a27
+              href: >-
+                https://mycsp.com/tmf-api/geographicAddressManagement/v5/geographicAddress/fcdb7157-3df9-4c49-93a6-8a3a248d9a27
+              '@type': GeographicAddressRef
+              '@referredType': GeographicAddress
+            '@type': RelatedGeographicAddressRef
+        siteFeature:
+          - id: f9f06997-5a8c-4079-9c84-afdd154c3fcf
+            name: Out Of Hours Access
+            '@type': GeographicSiteFeature
+            featureCategory:
+              - OutOfHoursAccess
+            isEnabled: true
+            featureCharacteristic:
+              - '@type': StringCharacteristic
+                id: 4b69fcbb-6d89-4de3-8f90-fd12a567ddfc
+                name: Description
+                value: >-
+                  For out-of-hours weekday access please report to the reception to gain access to
+                  the site.
+            validFor:
+              - '@type': CalendarPeriod
+                day: weekdays
+                timeZone: '+00:00'
+                hourPeriod:
+                  - startHour: '18:00'
+                    endHour: '09:00'
+                status: open
+          - id: d31a8f92-b8e7-4c82-8042-997ff5b64e30
+            name: Survey Information
+            '@type': GeographicSiteFeature
+            featureCategory:
+              - GeographicSiteFeature
+            featureCharacteristic:
+              - '@type': StringCharacteristic
+                id: 4b69fcbb-6d89-4de3-8f90-fd12a567ddfc
+                name: Site Survey Reports
+                value: >-
+                  Information on underground and overhead utilities (e.g., gas lines, electrical
+                  cables) to avoid interference during installation.
+            attachment:
+              - href: >-
+                  https://mycsp.com/tmf-api/documentManagement/v5/attachment/bc4d58a3-549c-4082-98de-d1dc9b1066a4
+                id: bc4d58a3-549c-4082-98de-d1dc9b1066a4
+                '@referredType': Attachment
+                '@type': AttachmentRef
+            note:
+              - '@type': Note
+                id: 8921d8e6-6570-4260-bba8-e66cbba4b49b
+                author: Mr. N. Bene
+                date: '2024-03-16T08:00:00Z'
+                text: Site Survey received from TechSurvey&Co
+            relatedParty:
+              - '@type': RelatedPartyRefOrPartyRoleRef
+                role: SurveyPartner
+                partyOrPartyRole:
+                  href: >-
+                    https://mycsp.com/tmf-api/partyManagement/v5/organization/1b3cc700-36cf-404c-85d5-c9f1c3c8fd99
+                  id: 1b3cc700-36cf-404c-85d5-c9f1c3c8fd99
+                  name: TechSurvey&Co
+                  '@type': PartyRef
+                  '@referredType': Organization
+      description: Response message
+    GeographicSite_partialupdate_example_03_request:
+      value:
+        - op: test
+          path: '$.siteFeature[?(@.id==''f9f06997-5a8c-4079-9c84-afdd154c3fcf'')].name'
+          value: Out Of Hours Access
+        - op: replace
+          path: '$.siteFeature[?(@.id==''f9f06997-5a8c-4079-9c84-afdd154c3fcf'')].name'
+          value: Out Of Hours Access Updated
+      description: >-
+        Here is an example of a request for updating geographic site
+        ae4b915f-16f5-4f05-a3c7-8c6a99c7d24b - Change a site feature name (JSON Patch Query; update
+        applied only if all `test` operations succeed) - the full resource representation is sent in
+        PATCH response
+    GeographicSite_partialupdate_example_03_response:
+      value:
+        '@type': GeographicSite
+        href: >-
+          https://mycsp.com/tmf-api/geographicSiteManagement/v5/geographicSite/ae4b915f-16f5-4f05-a3c7-8c6a99c7d24b
+        id: ae4b915f-16f5-4f05-a3c7-8c6a99c7d24b
+        name: BS-9999
+        externalIdentifier:
+          - '@type': ExternalIdentifier
+            owner: Address Management System
+            externalIdentifierType: Address
+            id: f76bc43c-53d5-4222-8ac3-f1a3e5b7d3ab
+        creationDate: '2024-03-15T07:44:40.056Z'
+        description: This is the site for the base station BS-9999
+        status: active
+        siteCategory: FiberExchange
+        relatedParty:
+          - '@type': RelatedPartyRefOrPartyRoleRef
+            role: Owner
+            partyOrPartyRole:
+              href: >-
+                https://mycsp.com/tmf-api/partyManagement/v5/individual/da7f6b47-cd08-45a8-926b-d5824a5980e3
+              id: da7f6b47-cd08-45a8-926b-d5824a5980e3
+              name: TelcoEngineering
+              '@type': PartyRef
+              '@referredType': Organization
+        calendar:
+          - '@type': CalendarPeriod
+            day: weekdays
+            timeZone: '+00:00'
+            hourPeriod:
+              - startHour: '09:00'
+                endHour: '18:00'
+            status: open
+        relatedAddress:
+          - role: service-address
+            address:
+              id: fcdb7157-3df9-4c49-93a6-8a3a248d9a27
+              href: >-
+                https://mycsp.com/tmf-api/geographicAddressManagement/v5/geographicAddress/fcdb7157-3df9-4c49-93a6-8a3a248d9a27
+              '@type': GeographicAddressRef
+              '@referredType': GeographicAddress
+            '@type': RelatedGeographicAddressRef
+        siteFeature:
+          - id: f9f06997-5a8c-4079-9c84-afdd154c3fcf
+            name: Out Of Hours Access Updated
+            '@type': GeographicSiteFeature
+            featureCategory:
+              - OutOfHoursAccess
+            isEnabled: true
+            featureCharacteristic:
+              - '@type': StringCharacteristic
+                id: 4b69fcbb-6d89-4de3-8f90-fd12a567ddfc
+                name: Description
+                value: >-
+                  For out-of-hours weekday access please report to the reception to gain access to
+                  the site.
+            validFor:
+              - '@type': CalendarPeriod
+                day: weekdays
+                timeZone: '+00:00'
+                hourPeriod:
+                  - startHour: '18:00'
+                    endHour: '09:00'
+                status: open
+          - id: d31a8f92-b8e7-4c82-8042-997ff5b64e30
+            name: Survey Information
+            '@type': GeographicSiteFeature
+            featureCategory:
+              - GeographicSiteFeature
+            featureCharacteristic:
+              - '@type': StringCharacteristic
+                id: 4b69fcbb-6d89-4de3-8f90-fd12a567ddfc
+                name: Site Survey Reports
+                value: >-
+                  Information on underground and overhead utilities (e.g., gas lines, electrical
+                  cables) to avoid interference during installation.
+            attachment:
+              - href: >-
+                  https://mycsp.com/tmf-api/documentManagement/v5/attachment/bc4d58a3-549c-4082-98de-d1dc9b1066a4
+                id: bc4d58a3-549c-4082-98de-d1dc9b1066a4
+                '@referredType': Attachment
+                '@type': AttachmentRef
+            note:
+              - '@type': Note
+                id: 8921d8e6-6570-4260-bba8-e66cbba4b49b
+                author: Mr. N. Bene
+                date: '2024-03-16T08:00:00Z'
+                text: Site Survey received from TechSurvey&Co
+            relatedParty:
+              - '@type': RelatedPartyRefOrPartyRoleRef
+                role: SurveyPartner
+                partyOrPartyRole:
+                  href: >-
+                    https://mycsp.com/tmf-api/partyManagement/v5/organization/1b3cc700-36cf-404c-85d5-c9f1c3c8fd99
+                  id: 1b3cc700-36cf-404c-85d5-c9f1c3c8fd99
+                  name: TechSurvey&Co
+                  '@type': PartyRef
+                  '@referredType': Organization
+      description: Response message
+    Create_request:
+      value:
+        correlationId: 82392652-42ce-4284-9a47-16d0fb06d269
+        description: GeographicSiteCreateEvent illustration
+        domain: Resource
+        eventId: 43265751-ceca-4133-9338-31bfd4edbf75
+        eventTime: '2024-08-25T12:25:22.380Z'
+        eventType: GeographicSiteCreateEvent
+        priority: '3'
+        timeOccurred: '2022-08-25T12:25:12.746Z'
+        title: GeographicSiteCreateEvent
+        event:
+          geographicSite:
+            id: ae4b915f-16f5-4f05-a3c7-8c6a99c7d24b
+            href: >-
+              https://mycsp.com/tmf-api/geographicSiteManagement/v5/geographicSite/ae4b915f-16f5-4f05-a3c7-8c6a99c7d24b
+            '@type': GeographicSite
+            externalIdentifier:
+              - id: f76bc43c-53d5-4222-8ac3-f1a3e5b7d3ab
+                '@type': ExternalIdentifier
+                owner: Address Management System
+                externalIdentifierType: Address
+            creationDate: '2024-03-15T07:44:40.056Z'
+            description: This is the site for the base station BS-9283
+            status: active
+            siteCategory: BaseStation
+            relatedParty:
+              - '@type': RelatedPartyRefOrPartyRoleRef
+                role: Owner
+                partyOrPartyRole:
+                  id: da7f6b47-cd08-45a8-926b-d5824a5980e3
+                  href: >-
+                    https://mycsp.com/tmf-api/partyManagement/v5/individual/da7f6b47-cd08-45a8-926b-d5824a5980e3
+                  name: TelcoEngineering
+                  '@type': PartyRef
+                  '@referredType': Organization
+            calendar:
+              - '@type': CalendarPeriod
+                day: weekdays
+                timeZone: '+00:00'
+                hourPeriod:
+                  - endHour: '18:00'
+                    startHour: '09:00'
+                status: open
+            relatedAddress:
+              - role: service-address
+                address:
+                  id: fcdb7157-3df9-4c49-93a6-8a3a248d9a27
+                  href: >-
+                    https://mycsp.com/tmf-api/geographicAddressManagement/v5/geographicAddress/fcdb7157-3df9-4c49-93a6-8a3a248d9a27
+                  '@type': GeographicAddressRef
+                  '@referredType': GeographicAddress
+                '@type': RelatedGeographicAddressRef
+            siteFeature:
+              - id: f9f06997-5a8c-4079-9c84-afdd154c3fcf
+                name: Out Of Hours Access
+                '@type': GeographicSiteFeature
+                featureCategory:
+                  - OutOfHoursAccess
+                isEnabled: true
+                featureCharacteristic:
+                  - id: 4b69fcbb-6d89-4de3-8f90-fd12a567ddfc
+                    '@type': StringCharacteristic
+                    name: Out of Hours Access
+                    value: >-
+                      For out-of-hours weekday access please report to the reception to gain access
+                      to the site.
+                validFor:
+                  - '@type': CalendarPeriod
+                    day: weekdays
+                    timeZone: '+00:00'
+                    hourPeriod:
+                      - startHour: '18:00'
+                        endHour: '09:00'
+                    status: open
+              - id: d31a8f92-b8e7-4c82-8042-997ff5b64e30
+                name: Survey Information
+                '@type': GeographicSiteFeature
+                featureCategory:
+                  - SiteFeature
+                featureCharacteristic:
+                  - id: 4b69fcbb-6d89-4de3-8f90-fd12a567ddfc
+                    '@type': StringCharacteristic
+                    name: Site Survey Reports
+                    value: >-
+                      Information on underground and overhead utilities (e.g., gas lines, electrical
+                      cables) to avoid interference during installation.
+                attachment:
+                  - id: bc4d58a3-549c-4082-98de-d1dc9b1066a4
+                    href: >-
+                      https://mycsp.com/tmf-api/documentManagement/v5/attachment/bc4d58a3-549c-4082-98de-d1dc9b1066a4
+                    '@referredType': Attachment
+                    '@type': AttachmentRef
+                note:
+                  - id: 8921d8e6-6570-4260-bba8-e66cbba4b49b
+                    '@type': Note
+                    author: Mr. N. Bene
+                    date: '2024-03-16T08:00:00Z'
+                    text: Site Survey received from TechSurvey&Co
+                relatedParty:
+                  - '@type': RelatedPartyRefOrPartyRoleRef
+                    role: SurveyPartner
+                    partyOrPartyRole:
+                      id: 1b3cc700-36cf-404c-85d5-c9f1c3c8fd99
+                      href: >-
+                        https://mycsp.com/tmf-api/partyManagement/v5/organization/1b3cc700-36cf-404c-85d5-c9f1c3c8fd99
+                      name: TechSurvey&Co
+                      '@type': PartyRef
+                      '@referredType': Organization
+        reportingSystem:
+          id: 1afd23e9-5cfc-45b7-93a2-3de523b34971
+          name: APP-746
+          '@type': ReportingResource
+          '@referredType': LogicalResource
+        source:
+          id: 769d82a4-c0c8-4d0d-8e76-c8b38de8b06d
+          name: APP-623
+          '@type': ReportingResource
+          '@referredType': LogicalResource
+        '@baseType': Event
+        '@type': GeographicSiteCreateEvent
+      description: Message example for GeographicSiteCreateEvent event
+    AttributeValueChange_request:
+      value:
+        correlationId: e757af54-9a28-4f35-b2e7-071a6736c62d
+        description: GeographicSiteAttributeValueChangeEvent illustration
+        domain: Resource
+        eventId: 64a81a78-9f37-42f3-a59d-a59b4699a7ee
+        eventTime: '2024-08-25T12:25:22.389Z'
+        eventType: GeographicSiteAttributeValueChangeEvent
+        priority: '4'
+        timeOccurred: '2022-08-25T12:25:12.838Z'
+        title: GeographicSiteAttributeValueChangeEvent
+        event:
+          geographicSite:
+            id: 0738f85e-c8b0-4ed2-ac3e-b47687ade274
+            href: >-
+              https://mycsp.com/tmf-api/geographicSiteManagement/v5/geographicSite/0738f85e-c8b0-4ed2-ac3e-b47687ade274
+            '@type': GeographicSite
+            externalIdentifier:
+              - id: 01abc593-82f5-4609-bd6e-31e58078e690
+                '@type': ExternalIdentifier
+                owner: Address Management System
+                externalIdentifierType: Address
+        reportingSystem:
+          id: cd8d6280-1abc-4542-8663-263fbe2c0eed
+          name: APP-746
+          '@type': ReportingResource
+          '@referredType': LogicalResource
+        source:
+          id: 1235910b-2ed0-4d38-a5c2-ee35cb7cc542
+          name: APP-623
+          '@type': ReportingResource
+          '@referredType': LogicalResource
+        '@baseType': Event
+        '@type': GeographicSiteAttributeValueChangeEvent
+      description: Message example for GeographicSiteAttributeValueChangeEvent event
+    StateChange_request:
+      value:
+        correlationId: 8dd2490d-8730-4110-a1a8-34bf9c1971a3
+        description: GeographicSiteStateChangeEvent illustration
+        domain: Resource
+        eventId: 1d75bf59-3ec0-4d26-af4e-b77a13633771
+        eventTime: '2024-08-25T12:25:22.399Z'
+        eventType: GeographicSiteStateChangeEvent
+        priority: '5'
+        timeOccurred: '2022-08-25T12:25:21.823Z'
+        title: GeographicSiteStateChangeEvent
+        event:
+          geographicSite:
+            id: 0738f85e-c8b0-4ed2-ac3e-b47687ade274
+            href: >-
+              https://mycsp.com/tmf-api/geographicSiteManagement/v5/geographicSite/0738f85e-c8b0-4ed2-ac3e-b47687ade274
+            '@type': GeographicSite
+            status: active
+        reportingSystem:
+          id: d20571a2-d2a5-4676-99ab-025636682ed8
+          name: APP-746
+          '@type': ReportingResource
+          '@referredType': LogicalResource
+        source:
+          id: 50a04a29-f37b-439c-933d-329e40b3beef
+          name: APP-623
+          '@type': ReportingResource
+          '@referredType': LogicalResource
+        '@baseType': Event
+        '@type': GeographicSiteStateChangeEvent
+      description: Message example for GeographicSiteStateChangeEvent event
+    Delete_request:
+      value:
+        correlationId: 92751b27-3994-45db-9893-b4b6a525bae8
+        description: GeographicSiteDeleteEvent illustration
+        domain: Commercial
+        eventId: 3682a85c-1594-4153-a29e-fe4f94dfbb10
+        eventTime: '2024-03-18T07:23:06Z'
+        eventType: GeographicSiteDeleteEvent
+        priority: '2'
+        timeOccurred: '2024-03-18T07:23:06Z'
+        title: GeographicSiteDeleteEvent
+        event:
+          geographicSite:
+            id: ae4b915f-16f5-4f05-a3c7-8c6a99c7d24b
+            href: >-
+              https://mycsp.com/tmf-api/geographicSiteManagement/v5/geographicSite/ae4b915f-16f5-4f05-a3c7-8c6a99c7d24b
+            '@type': GeographicSite
+        reportingSystem:
+          id: 2759b03b-5d5c-42be-af24-015de991badf
+          name: APP-746
+          '@type': ReportingResource
+          '@referredType': LogicalResource
+        source:
+          id: db017150-c573-465a-8c39-47c2f730fe37
+          name: APP-623
+          '@type': ReportingResource
+          '@referredType': LogicalResource
+        '@baseType': Event
+        '@type': GeographicSiteDeleteEvent
+      description: Message example for GeographicSiteDeleteEvent event
